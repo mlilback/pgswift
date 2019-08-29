@@ -68,6 +68,8 @@ public final class Connection {
 		pgConnection = nil
 	}
 	
+	// MARK: status
+	
 	public var lastErrorMessage: String {
 		guard let err = PQerrorMessage(pgConnection) else { return "" }
 		return String(cString: err)
@@ -82,5 +84,56 @@ public final class Connection {
 	func validateConnection() throws {
 		guard pgConnection != nil else { throw PostgreSQLError(code: .connectionDoesNotExist, connection: self) }
 		guard isConnected else { throw PostgreSQLError(code: .connectionFailure, connection: self) }
+	}
+
+	/// Returns the version of the server. Only works if a connection is open.
+	///
+	/// - Returns: the server version string
+	public func serverVersion() throws -> String {
+		guard isConnected else { throw PostgreSQLError(code: .connectionDoesNotExist, connection: self) }
+		return String(utf8String: PQparameterStatus(pgConnection, "server_version")) ?? "unknown"
+	}
+	
+	// MARK: sql execution
+	
+	public func execute(query: String) throws -> PGResult {
+		guard isConnected else { throw PostgreSQLError(code: .connectionDoesNotExist , connection: self) }
+		let rawResult: OpaquePointer? = PQexec(pgConnection, query)
+		guard let result = rawResult else { throw PostgreSQLStatusErrors.badResponse }
+		return PGResult(result: result, connection: self)
+	}
+	
+	// MARK: Notify/Listen
+
+	/// Creates a dispatch read source for this connection that will call `callback` on `queue` when a notification is received
+	///
+	/// - Parameter channel: the channel to register for
+	/// - Parameter queue: the queue to create the DispatchSource on
+	/// - Parameter callback: the callback
+	/// - Parameter notification: The notification received from the database
+	/// - Parameter error: Any error while reading the notification. If not nil, the source will have been canceled
+	/// - Returns: the dispatch socket to activate
+	/// - Throws: if fails to get the socket for the connection
+	public func listen(toChannel channel: String, queue: DispatchQueue, callback: @escaping (_ notification: PGNotification?, _ error: Error?) -> Void) throws -> DispatchSourceRead {
+		let sock = PQsocket(self.pgConnection)
+		guard sock >= 0 else {
+			throw PostgreSQLError(code: .ioError, reason: "failed to get socket for connection")
+		}
+		let src = DispatchSource.makeReadSource(fileDescriptor: sock, queue: queue)
+		src.setEventHandler { [weak self] in
+			guard let strongSelf = self else { return }
+			guard strongSelf.pgConnection != nil else {
+				callback(nil, PostgreSQLError(code: .connectionDoesNotExist, reason: "connection does not exist"))
+				return
+			}
+			PQconsumeInput(strongSelf.pgConnection)
+			while let pgNotify = PQnotifies(strongSelf.pgConnection) {
+				let notification = PGNotification(pgNotify: pgNotify.pointee)
+				callback(notification, nil)
+				PQfreemem(pgNotify)
+			}
+		}
+//		try self.execute("LISTEN \(channel)")
+		return src
 	}
 }
