@@ -12,9 +12,9 @@ docker run --name pgtest -e POSTGRES_PASSWORD="pgtest" -p 5433:5432 --rm -d post
 echo "waiting for db to start"
 sleep 10;
 docker logs pgtest
-docker exec pg-test psql -U postgres -c "create database test;"
-docker exec pg-test psql -U postgres -c "create user test superuser password 'secret';"
-docker exec pg-test psql -U postgres -c "grant all privileges on database test to test;"
+docker exec pgtest psql -U postgres -c "create database test;"
+docker exec pgtest psql -U postgres -c "create user test superuser password 'secret';"
+docker exec pgtest psql -U postgres -c "grant all privileges on database test to test;"
 
 sleep 1;
 echo "server ready"
