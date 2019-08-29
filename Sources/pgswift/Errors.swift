@@ -13,6 +13,11 @@ public enum PostgreSQLStatusErrors: Error {
 	case alreadyOpen
 	case badResponse
 	case emptyQuery
+	case unsupportedDataFormat
+}
+
+enum InternalError: Error {
+	case nilValue
 }
 
 // Copied from vapor 2's postgresql project
