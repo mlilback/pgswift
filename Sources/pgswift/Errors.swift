@@ -318,15 +318,31 @@ extension PostgreSQLError {
 // MARK: Inits
 
 extension PostgreSQLError {
+	public init(code: Code, errorMessage: String) {
+		self.init(code: code, reason: errorMessage)
+	}
+	
+	/// Create an error. This method will lock the connection
+	///
+	/// - Parameters:
+	///   - code: the postgresl error code
+	///   - connection: the connection to retrieve the error message
 	public init(code: Code, connection: Connection) {
-		let reason: String
-		if let error = PQerrorMessage(connection.pgConnection) {
-			reason = String(cString: error)
+		var reason = connection.lastErrorMessage //uses lock
+		if reason.count < 1 {
+			reason = "unknown"
 		}
-		else {
-			reason = "Unknown"
+		self.init(code: code, reason: reason)
+	}
+	
+	/// internal version that for when the connection is already locked
+	internal init(code: Code, pgConnection: OpaquePointer) {
+		var reason = "unknown"
+		if let error = PQerrorMessage(pgConnection),
+			let pgreason = String(validatingUTF8: error)
+		{
+			reason = pgreason
 		}
-		
 		self.init(code: code, reason: reason)
 	}
 }
