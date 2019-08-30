@@ -140,8 +140,7 @@ public final class Connection {
 	
 	/// get a boolean parameter setting
 	private func getBooleanParameter(key: String, defaultValue: Bool = false) -> Bool {
-		guard isConnected, let pgcon = pgConnection
-			else { return false }
+		guard let pgcon = pgConnection else { return false }
 
 		guard let value = PQparameterStatus(pgcon, key) else { return defaultValue }
 		return String(cString: value) == "on"
