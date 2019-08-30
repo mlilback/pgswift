@@ -28,6 +28,8 @@ public struct PostgreSQLError: Error {
 	public let code: Code
 	/// The last error message from the connection
 	public let reason: String
+	
+	var localizedDescription: String { return "error: \(code), reason: \(reason)" }
 }
 
 extension PostgreSQLError {

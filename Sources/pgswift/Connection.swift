@@ -144,6 +144,7 @@ public final class Connection {
 	/// - Parameter query: query to perform
 	/// - Returns: the results of that query
 	/// - Throws: if connection isn't open, or don't get a valid response
+	@discardableResult
 	public func execute(query: String) throws -> PGResult {
 		return try conQueue.sync {
 			guard isConnectedRaw else {
