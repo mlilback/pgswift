@@ -15,13 +15,18 @@ public class PGResult {
 	// Reference date in Postgres is 2000-01-01, while in Swift it is 2001-01-01. There were 366 days in the year 2000.
 	private let timeIntervalBetween1970AndPostgresReferenceDate = Date.timeIntervalBetween1970AndReferenceDate - TimeInterval(366 * 24 * 60 * 60)
 
-	let result: OpaquePointer
+	private let result: OpaquePointer
 	weak var connection: Connection?
 	public let status: Status
 	private let dateFormatter: ISO8601DateFormatter
 	private let timeFormatter: ISO8601DateFormatter
 	private let timestampFormatter: DateFormatter
 	
+	/// true if the result was .commandkOk, .tuplesOk, or .signleTupe
+	public var wasSuccessful: Bool {
+		return status == .commandOk || status == .tuplesOk || status == .singleTuple
+	}
+
 	public var statusMessage: String { return String(cString: PQresStatus(status.pgStatus)) }
 	public var errorMessage: String { return String(cString: PQresultErrorMessage(result)) }
 	public var rowCount: Int { return Int(PQntuples(result)) }
@@ -267,6 +272,9 @@ public class PGResult {
 		case emptyQuery
 		case singleTuple
 		
+		/// Creates a status enum value
+		///
+		/// - Parameter pointer: the PQresult
 		init(_ pointer: OpaquePointer?) {
 			guard let pointer = pointer else {
 				self = .fatalError
@@ -299,6 +307,7 @@ public class PGResult {
 			}
 		}
 		
+		/// the matching PostgreSQL status
 		public var pgStatus :  ExecStatusType {
 			switch self {
 			case .commandOk: return PGRES_COMMAND_OK
