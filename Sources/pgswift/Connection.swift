@@ -9,7 +9,7 @@ import Foundation
 import CLibpq
 
 public final class Connection {
-	
+	// MARK: - properties
 	public typealias PGConnection = OpaquePointer
 	
 	/// the info this connection was created with
@@ -20,7 +20,9 @@ public final class Connection {
 	private static var nextQueueNumber = 1
 	private let conQueue: DispatchQueue
 	
-	/// designatedc initializer.
+	// MARK: - init/deinit
+	
+	/// designated initializer.
 	///
 	/// - Parameter connectInfo: the arguments that will be used to open a connection
 	public init(connectInfo: ConnectInfo) {
@@ -57,16 +59,7 @@ public final class Connection {
 		close()
 	}
 	
-	/// Allows use of this connection's PGConnection synchronously
-	///
-	/// - Parameter body: closure called with the PG connection
-	public func withPGConnection(body: (PGConnection) -> Void) {
-		guard isConnected, let pgcon = pgConnection else
-		{ precondition(isConnected, "database not connected"); return }
-		conQueue.sync {
-			body(pgcon)
-		}
-	}
+	// MARK: - open/close
 	
 	/// opens the connection to the database server
 	public func open() throws {
@@ -88,7 +81,7 @@ public final class Connection {
 		}
 	}
 	
-	// MARK: status
+	// MARK: - status
 	
 	public var lastErrorMessage: String {
 		return conQueue.sync {
@@ -128,7 +121,20 @@ public final class Connection {
 		}
 	}
 	
-	// MARK: sql execution
+	// MARK: - convience methods
+	
+	/// Allows use of this connection's PGConnection synchronously
+	///
+	/// - Parameter body: closure called with the PG connection
+	public func withPGConnection(body: (PGConnection) -> Void) {
+		guard isConnected, let pgcon = pgConnection else
+		{ precondition(isConnected, "database not connected"); return }
+		conQueue.sync {
+			body(pgcon)
+		}
+	}
+	
+	// MARK: - sql execution
 	
 	/// execute query without locking (to be called when already locked)
 	@discardableResult
@@ -156,7 +162,7 @@ public final class Connection {
 		}
 	}
 	
-	// MARK: Notify/Listen
+	// MARK: - Notify/Listen
 
 	/// Creates a dispatch read source for this connection that will call `callback` on `queue` when a notification is received
 	///
