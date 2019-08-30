@@ -10,7 +10,7 @@ import CLibpq
 
 public final class Connection {
 	// MARK: - properties
-	public typealias PGConnection = OpaquePointer
+	public typealias PGConnection = OpaquePointer?
 	
 	/// the info this connection was created with
 	let connectInfo: ConnectInfo
@@ -75,8 +75,8 @@ public final class Connection {
 	/// closes the connection to the database server
 	public func close() {
 		conQueue.sync {
-			guard pgConnection != nil  else { return }
-			PQfinish(pgConnection)
+			guard let pgcon = pgConnection  else { return }
+			PQfinish(pgcon)
 			pgConnection = nil
 		}
 	}
@@ -85,7 +85,7 @@ public final class Connection {
 	
 	public var lastErrorMessage: String {
 		return conQueue.sync {
-			guard let err = PQerrorMessage(pgConnection) else { return "" }
+			guard let pgcon = pgConnection, let err = PQerrorMessage(pgcon) else { return "" }
 			return String(validatingUTF8: err) ?? ""
 		}
 	}
@@ -116,8 +116,9 @@ public final class Connection {
 	/// - Returns: the server version string
 	public func serverVersion() throws -> String {
 		return try conQueue.sync {
-			guard isConnectedRaw else { throw PostgreSQLError(code: .connectionDoesNotExist, connection: self) }
-			return String(validatingUTF8: PQparameterStatus(pgConnection, "server_version")) ?? "unknown"
+			guard isConnectedRaw, let pgcon = pgConnection else
+				{ throw PostgreSQLError(code: .connectionDoesNotExist, connection: self) }
+			return String(validatingUTF8: PQparameterStatus(pgcon, "server_version")) ?? "unknown"
 		}
 	}
 	
@@ -139,8 +140,9 @@ public final class Connection {
 	/// execute query without locking (to be called when already locked)
 	@discardableResult
 	private func executeRaw(query: String) throws -> PGResult {
-		guard isConnectedRaw else { throw PostgreSQLError(code: .connectionDoesNotExist , connection: self) }
-		let rawResult: OpaquePointer? = PQexec(pgConnection, query)
+		guard isConnectedRaw, let pgcon = pgConnection else
+			{ throw PostgreSQLError(code: .connectionDoesNotExist , connection: self) }
+		let rawResult: OpaquePointer? = PQexec(pgcon, query)
 		guard let result = rawResult else { throw PostgreSQLStatusErrors.badResponse }
 		return PGResult(result: result, connection: self)
 	}
@@ -153,15 +155,20 @@ public final class Connection {
 	@discardableResult
 	public func execute(query: String) throws -> PGResult {
 		return try conQueue.sync {
-			guard isConnectedRaw else {
-				throw PostgreSQLError(code: .connectionDoesNotExist , pgConnection: pgConnection!)
+			guard isConnectedRaw, let pgcon = pgConnection else {
+				throw PostgreSQLError(code: .connectionDoesNotExist , errorMessage: "no connnection")
 			}
-			let rawResult: OpaquePointer? = PQexec(pgConnection, query)
+			let rawResult: OpaquePointer? = PQexec(pgcon, query)
 			guard let result = rawResult else { throw PostgreSQLStatusErrors.badResponse }
 			return PGResult(result: result, connection: self)
 		}
 	}
-	
+
+//	@discardableResult
+//	public func executeBinary(query: String) -> PGResult {
+//
+//	}
+//
 	// MARK: - Notify/Listen
 
 	/// Creates a dispatch read source for this connection that will call `callback` on `queue` when a notification is received
@@ -175,14 +182,15 @@ public final class Connection {
 	/// - Throws: if fails to get the socket for the connection
 	public func listen(toChannel channel: String, queue: DispatchQueue, callback: @escaping (_ notification: PGNotification?, _ error: Error?) -> Void) throws -> DispatchSourceRead {
 		return try conQueue.sync { () -> DispatchSourceRead in
-			let sock = PQsocket(self.pgConnection)
+			guard let pgcon = self.pgConnection else
+				{ throw PostgreSQLError(code: .connectionDoesNotExist, errorMessage: "connection does not exist") }
+			let sock = PQsocket(pgcon)
 			guard sock >= 0 else {
 				throw PostgreSQLError(code: .ioError, reason: "failed to get socket for connection")
 			}
 			let src = DispatchSource.makeReadSource(fileDescriptor: sock, queue: queue)
 			src.setEventHandler { [weak self] in
-				guard let strongSelf = self else { return }
-				guard strongSelf.pgConnection != nil else {
+				guard let strongSelf = self, strongSelf.isConnected else {
 					callback(nil, PostgreSQLError(code: .connectionDoesNotExist, reason: "connection does not exist"))
 					return
 				}
