@@ -45,12 +45,17 @@ final class QueryTests: XCTestCase {
 				name varchar(20) not null,
 				age int,
 				signupDate date DEFAULT NOW(),
-				signupStamp timestamp with time zone default now());
-			INSERT INTO person (id, name, age, signupDate, signupStamp) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00');
+				signupStamp timestamp with time zone default now(),
+				member boolean default false,
+				fval float,
+				dval double precision);
+			INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454);
 			INSERT INTO person (id, name, age, signupDate) VALUES (2, 'kenny', 44, '2019-03-11');
 			INSERT INTO person (id, name) VALUES (3, 'brinley');
 		""")
-		XCTAssert(result!.status == .commandOk)
+		let status = result!.status
+		print("stat=\(status), lastError=\(result!.errorMessage)")
+		XCTAssert(result!.wasSuccessful)
 	}
 	
 	override func tearDown() {
@@ -62,13 +67,23 @@ final class QueryTests: XCTestCase {
 		guard let con = connection else { XCTFail(); return }
 		XCTAssert(con.isConnected)
 		do {
-			let result = try con.execute(query: "select id, name, age, signupDate, signupStamp from person")
+			// provide code coverage
+			try con.validateConnection()
+			let sversion = try con.serverVersion()
+			XCTAssertTrue(sversion.starts(with: "9.6."))
+			
+			// select all persons
+			let result = try con.execute(query: "select id, name, age, signupDate, signupStamp, member, fval, dval from person")
 			XCTAssertEqual(result.rowCount, 3)
 			XCTAssertEqual(try result.getStringValue(row: 0, column: 1), "mark")
 			XCTAssertEqual(try result.getIntValue(row: 1, column: 2), 44)
 			XCTAssertNil(try result.getIntValue(row: 2, column: 2))
-			let signup = try result.getDateValue(row: 0, column: 4)!
-			print("signup = \(String(describing: signup))")
+			XCTAssertTrue(try result.getBoolValue(row: 0, column: 5)!)
+			XCTAssertEqual(try result.getFloatValue(row: 0, column: 6)!, 2.34, accuracy: 0.01)
+			XCTAssertEqual(try result.getDoubleValue(row: 0, column: 7)!, 0.000454, accuracy: 0.00001)
+//			let signup = try result.getDateValue(row: 0, column: 4)!
+//			print("signup = \(String(describing: signup))")
+			XCTAssertEqual(con.lastErrorMessage, "")
 		} catch let err as PostgreSQLError {
 			print(err.localizedDescription)
 			XCTFail()
