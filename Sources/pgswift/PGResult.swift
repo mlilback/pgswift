@@ -59,7 +59,7 @@ public class PGResult {
 		columnNames = (0..<colCount).map { return String(utf8String: PQfname(result, Int32($0))) ?? "" }
 		columnFormats = (0..<colCount).map { return PQfformat(result, Int32($0))  == 0 ? .string : .binary }
 		columnTypes = (0..<colCount).map { return PGType(rawValue: PQftype(result, Int32($0))) ?? .unsupported }
-		ourReferenceDate = Date(timeIntervalSinceReferenceDate: timeIntervalBetween1970AndPostgresReferenceDate)
+		ourReferenceDate = Date(timeIntervalSince1970: timeIntervalBetween1970AndPostgresReferenceDate)
 		dateFormatter = ISO8601DateFormatter()
 		dateFormatter.formatOptions = [.withFullDate, .withDashSeparatorInDate]
 		timeFormatter = ISO8601DateFormatter()
@@ -117,11 +117,22 @@ public class PGResult {
 	/// - Throws: if an invalid column number
 	public func getDataValue(row: Int, column: Int) throws -> Data? {
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
-		precondition(columnFormats[column] == .binary) // FIXME: should support sting values
+
 		let size = Int(PQgetlength(result, Int32(row), Int32(column)))
 		guard let value = try setupValue(row: row, column: column) else { return nil }
-		let rawValue = UnsafeRawPointer(value)
-		return Data(bytes: rawValue, count: size)
+
+		if columnFormats[column] == .string {
+			var length: Int = 0
+			return try value.withMemoryRebound(to: CChar.self, capacity: size) { ptr in
+				guard let ptr = PQunescapeBytea(String(utf8String: ptr), &length)
+					else {throw PostgreSQLError(code: .outOfMemory, errorMessage: "failed to unescape binary value") }
+				let raw = UnsafeRawPointer(ptr)
+				return Data(bytes: raw, count: size)
+			}
+		} else {
+			let rawValue = UnsafeRawPointer(value)
+			return Data(bytes: rawValue, count: size)
+		}
 	}
 	
 	/// Gets the specified value as a string. This works for more types than nativeType.string

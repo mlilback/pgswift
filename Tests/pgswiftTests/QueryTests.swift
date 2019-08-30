@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import pgswift
 
-// need to test: "insert returning", getData
+// need to test: "insert returning"
 
 extension Date {
 	var onlyDate: Date {
@@ -141,7 +141,7 @@ final class QueryTests: XCTestCase {
 				XCTFail("failed to post notification")
 			}
 			
-			waitForExpectations(timeout: 30) { err in
+			waitForExpectations(timeout: 3) { err in
 				if err != nil { XCTFail("notification timeout") }
 			}
 			XCTAssertNil(theError)
