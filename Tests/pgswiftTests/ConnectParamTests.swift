@@ -8,17 +8,14 @@ final class ConnectParamTests: XCTestCase {
 		pg?.close()
 	}
 	
-	func testBasicParams() {
+	func testBasicConnect() {
 		let basicInfo = ConnectInfo(host: "localhost", port: "5433", user: "test", password: "secret", dbname: "test", sslMode: .allow)
-//		basicInfo.withParamterCStrings { (nameStrings, valueStrings) in
-//		}
 		pg = Connection(connectInfo: basicInfo)
 		try! pg?.open()
-		XCTAssertNotNil(pg?.pgConnection)
 		XCTAssert(pg?.isConnected ?? false)
 	}
 
 	static var allTests = [
-		("testBasicParams", testBasicParams),
+		("testBasicConnect", testBasicConnect),
 	]
 }
