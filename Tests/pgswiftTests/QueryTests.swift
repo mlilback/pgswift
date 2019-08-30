@@ -50,7 +50,6 @@ final class QueryTests: XCTestCase {
 			INSERT INTO person (id, name, age, signupDate) VALUES (2, 'kenny', 44, '2019-03-11');
 			INSERT INTO person (id, name) VALUES (3, 'brinley');
 		""")
-		print("STATUS = \(result!.status): \(connection?.lastErrorMessage  ?? "??")")
 		XCTAssert(result!.status == .commandOk)
 	}
 	
@@ -103,8 +102,46 @@ final class QueryTests: XCTestCase {
 		}
 	}
 	
+	func testNotifications() {
+		let channelName = "foobar"
+		let payload = "barfoo"
+		guard let con = connection else { XCTFail(); return }
+		XCTAssert(con.isConnected)
+		let expectation = self.expectation(description: "notification delivery")
+		var theNote: PGNotification?
+		var theError: Error?
+		do {
+			let source = try con.listen(toChannel: channelName, queue: .global()) { (note, error) in
+				theNote = note
+				theError = error
+				expectation.fulfill()
+			}
+			source.resume()
+			sleep(1)
+			
+			let nresult = try con.execute(query: "select pg_notify('\(channelName)', '\(payload)');")
+			if !nresult.wasSuccessful {
+				XCTFail("failed to post notification")
+			}
+			
+			waitForExpectations(timeout: 30) { err in
+				if err != nil { XCTFail("notification timeout") }
+			}
+			XCTAssertNil(theError)
+			guard let note = theNote else { XCTFail(); return }
+			XCTAssertNotNil(theNote)
+			XCTAssertEqual(note.channel, channelName)
+			XCTAssertEqual(note.payload, payload)
+		} catch let err as PostgreSQLError {
+			XCTFail(err.localizedDescription)
+		} catch {
+			XCTFail("unknown error")
+		}
+	}
+	
 	static var allTests = [
 		("testBasicQuery", testBasicQuery),
-		("testBinaryQuery", testBinaryQuery)
+		("testBinaryQuery", testBinaryQuery),
+		("testNotifications", testNotifications),
 	]
 }
