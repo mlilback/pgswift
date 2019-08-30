@@ -103,4 +103,36 @@ public enum NativeType: String, CaseIterable {
 	case string
 	case date
 	case data
+	
+	/// Test if the native type's class is the same as the type parameter
+	///
+	/// - Parameter type: the type to test this MativeType to
+	/// - Returns: true if this NativeType is type
+	public func matches(_ type: Any.Type) -> Bool {
+		switch self {
+			case .int: return Int.self == type
+			case .bool: return Bool.self == type
+			case .float: return Float.self == type
+			case .double: return Double.self == type
+			case .string: return String.self == type
+			case .data: return Data.self == type
+			case .date: return Date.self == type
+		}
+	}
+
+	/// returns the metatype for this native type. For instance, .string return String.self
+	///
+	/// - Returns: the metatype for this NativeType (type.self)
+	public func metaType() -> Any.Type {
+		switch self {
+		case .int: return Int.self
+		case .bool: return Bool.self
+		case .float: return Float.self
+		case .double: return Double.self
+		case .string: return String.self
+		case .data: return Data.self
+		case .date: return Date.self
+		}
+	}
+
 }

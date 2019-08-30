@@ -75,6 +75,37 @@ public class PGResult {
 
 	// MARK: - get values from a row
 	
+	/// returns the value as the actual native type (String, Int, Bool, etc.)
+	///
+	/// - Parameters:
+	///   - row: row number
+	///   - column: column number
+	/// - Returns: the value
+	/// - Throws: if any parameter is invalid, if the column's NativeType doesn't match T
+	public func getValue<T>(row: Int, column: Int) throws -> T? {
+		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
+		guard row < rowCount else { throw PostgreSQLStatusErrors.invalidRowNumber }
+		guard columnTypes[column].nativeType.metaType() == T.self
+			else { throw PostgreSQLStatusErrors.invalidType }
+
+		switch columnTypes[column].nativeType {
+		case .bool:
+			return try getBoolValue(row: row, column: column) as? T
+		case .int:
+			return try getIntValue(row: row, column: column) as? T
+		case .float:
+			return try getFloatValue(row: row, column: column) as? T
+		case .double:
+			return try getDoubleValue(row: row, column: column) as? T
+		case .string:
+			return try getStringValue(row: row, column: column) as? T
+		case .date:
+			return try getDataValue(row: row, column: column) as? T
+		case .data:
+			return try getDateValue(row: row, column: column) as? T
+		}
+	}
+	
 	/// Gets the specified value as a data object.
 	///
 	/// - Parameters:

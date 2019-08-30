@@ -115,11 +115,9 @@ public final class Connection {
 	///
 	/// - Returns: the server version string
 	public func serverVersion() throws -> String {
-		return try conQueue.sync {
-			guard isConnectedRaw, let pgcon = pgConnection else
-				{ throw PostgreSQLError(code: .connectionDoesNotExist, connection: self) }
-			return String(validatingUTF8: PQparameterStatus(pgcon, "server_version")) ?? "unknown"
-		}
+		guard let sver: String =  try getSingleRowValue(query: "show server_version")
+			else { fatalError("failed to get server version") }
+		return sver
 	}
 	
 	// MARK: - convience methods
@@ -165,6 +163,11 @@ public final class Connection {
 	}
 
 	@discardableResult
+	/// Execute the query and returns the results. Internally transfers data in binary format
+	///
+	/// - Parameter query: query to perform
+	/// - Returns: the results of that query
+	/// - Throws: if connection isn't open, or don't get a valid response
 	public func executeBinary(query: String) throws -> PGResult {
 		return try conQueue.sync {
 			guard isConnectedRaw, let pgcon = pgConnection else {
@@ -174,6 +177,25 @@ public final class Connection {
 			let rawResult: OpaquePointer? =  PQexecParams(pgcon, query, 0, nil, nil, nil, nil, 1)
 			guard let result = rawResult else { throw PostgreSQLStatusErrors.badResponse }
 			return PGResult(result: result, connection: self)
+		}
+	}
+
+	/// Returns the value of row 0, column 0 of a query that returns 1 row and 1 column
+	///
+	/// - Parameters:
+	///   - query: a query that should return 1 row with 1 column
+	/// - Returns: the value
+	/// - Throws: if the data types don't match, or an error executing query
+	public func getSingleRowValue<T>(query: String) throws -> T? {
+		guard query.count > 0 else { throw PostgreSQLStatusErrors.emptyQuery }
+		return try conQueue.sync {
+			let result = try executeRaw(query: query)
+			guard result.columnCount == 1, result.rowCount == 1 else { throw PostgreSQLStatusErrors.invalidQuery }
+			let colType = result.columnTypes[0]
+			guard colType != .unsupported, colType.nativeType.matches(T.self)
+				else { throw PostgreSQLStatusErrors.invalidType }
+			let val: T? = try result.getValue(row: 0, column: 0)
+			return val
 		}
 	}
 

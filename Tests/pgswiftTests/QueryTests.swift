@@ -9,6 +9,8 @@ import Foundation
 import XCTest
 @testable import pgswift
 
+// need to test: "insert returning", getData
+
 extension Date {
 	var onlyDate: Date {
 		let calendar = Calendar.current

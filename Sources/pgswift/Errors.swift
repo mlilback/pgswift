@@ -16,6 +16,10 @@ public enum PostgreSQLStatusErrors: Error {
 	case unsupportedDataFormat
 	case invalidRowNumber
 	case invalidColumnNumber
+	/// query does not meet requirements of function call
+	case invalidQuery
+	/// when caller specifies a type and result is not that type
+	case invalidType
 }
 
 enum InternalError: Error {
