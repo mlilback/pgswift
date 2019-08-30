@@ -12,6 +12,8 @@ public final class Connection {
 	// MARK: - properties
 	public typealias PGConnection = OpaquePointer?
 	
+	/// if dates are stored as integer. If false, stored as float.
+	private(set) var hasIntegerDatetimes: Bool = false
 	/// the info this connection was created with
 	let connectInfo: ConnectInfo
 	/// the low-level PGConnection object from libpq
@@ -69,6 +71,7 @@ public final class Connection {
 				pgConnection = PQconnectdbParams(keywords, values, 0)
 			}
 			precondition(pgConnection != nil, "PQconnect returned nil, which means failed to alloc memory which should be  impossible")
+			hasIntegerDatetimes = getBooleanParameter(key: "integer_datetimes", defaultValue: true)
 		}
 	}
 	
@@ -131,6 +134,17 @@ public final class Connection {
 		conQueue.sync {
 			body(pgcon)
 		}
+	}
+	
+	// MARK: - private helper methods
+	
+	/// get a boolean parameter setting
+	private func getBooleanParameter(key: String, defaultValue: Bool = false) -> Bool {
+		guard isConnected, let pgcon = pgConnection
+			else { return false }
+
+		guard let value = PQparameterStatus(pgcon, key) else { return defaultValue }
+		return String(cString: value) == "on"
 	}
 	
 	// MARK: - sql execution

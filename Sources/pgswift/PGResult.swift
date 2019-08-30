@@ -14,6 +14,7 @@ public class PGResult {
 	private let secondsInDay: Int32 = 24 * 60 * 60
 	// Reference date in Postgres is 2000-01-01, while in Swift it is 2001-01-01. There were 366 days in the year 2000.
 	private let timeIntervalBetween1970AndPostgresReferenceDate = Date.timeIntervalBetween1970AndReferenceDate - TimeInterval(366 * 24 * 60 * 60)
+	private let ourReferenceDate: Date
 
 	private let result: OpaquePointer
 	weak var connection: Connection?
@@ -58,6 +59,7 @@ public class PGResult {
 		columnNames = (0..<colCount).map { return String(utf8String: PQfname(result, Int32($0))) ?? "" }
 		columnFormats = (0..<colCount).map { return PQfformat(result, Int32($0))  == 0 ? .string : .binary }
 		columnTypes = (0..<colCount).map { return PGType(rawValue: PQftype(result, Int32($0))) ?? .unsupported }
+		ourReferenceDate = Date(timeIntervalSinceReferenceDate: timeIntervalBetween1970AndPostgresReferenceDate)
 		dateFormatter = ISO8601DateFormatter()
 		dateFormatter.formatOptions = [.withFullDate, .withDashSeparatorInDate]
 		timeFormatter = ISO8601DateFormatter()
@@ -186,14 +188,24 @@ public class PGResult {
 		}
 		guard let rawValue = try setupValue(row: row, column: column) else { return nil }
 		if columnTypes[column] == .date {
-			let days = Int32(bigEndian: rawValue.withMemoryRebound(to: Int32.self, capacity: 1) { $0.pointee })
-			let timeInterval = TimeInterval(days * secondsInDay)
-			return Date(timeIntervalSince1970: timeInterval + timeIntervalBetween1970AndPostgresReferenceDate)
+			if connection?.hasIntegerDatetimes ?? true {
+				let days = Int32(bigEndian: rawValue.withMemoryRebound(to: Int32.self, capacity: 1) { $0.pointee })
+				let timeInterval = TimeInterval(days * secondsInDay)
+				return Date(timeInterval: timeInterval, since: ourReferenceDate)
+			} else {
+				let seconds = BinaryUtilities.parseFloat64(value: rawValue)
+				return Date(timeInterval: seconds, since: ourReferenceDate)
+			}
 		}
 		// otherwise, it is formatted like a timestamp
-		let microseconds = Int64(bigEndian: rawValue.withMemoryRebound(to: Int64.self, capacity: 1) { $0.pointee })
-		let timeInterval = TimeInterval(Double(microseconds) / 1000000.0)
-		return Date(timeIntervalSince1970: timeInterval + timeIntervalBetween1970AndPostgresReferenceDate)
+		if connection?.hasIntegerDatetimes ?? true {
+			let microseconds = Int64(bigEndian: rawValue.withMemoryRebound(to: Int64.self, capacity: 1) { $0.pointee })
+			let timeInterval = TimeInterval(Double(microseconds) / 1000000.0)
+			return Date(timeInterval: timeInterval, since: ourReferenceDate)
+		} else {
+			let seconds = BinaryUtilities.parseFloat64(value: rawValue)
+			return Date(timeInterval: seconds, since: ourReferenceDate)
+		}
 	}
 	
 	/// Gets the specified value as an integer if columnType.nativeType == .int
