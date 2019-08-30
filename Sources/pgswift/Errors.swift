@@ -14,6 +14,8 @@ public enum PostgreSQLStatusErrors: Error {
 	case badResponse
 	case emptyQuery
 	case unsupportedDataFormat
+	case invalidRowNumber
+	case invalidColumnNumber
 }
 
 enum InternalError: Error {

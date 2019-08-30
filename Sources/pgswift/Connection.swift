@@ -164,11 +164,19 @@ public final class Connection {
 		}
 	}
 
-//	@discardableResult
-//	public func executeBinary(query: String) -> PGResult {
-//
-//	}
-//
+	@discardableResult
+	public func executeBinary(query: String) throws -> PGResult {
+		return try conQueue.sync {
+			guard isConnectedRaw, let pgcon = pgConnection else {
+				throw PostgreSQLError(code: .connectionDoesNotExist , errorMessage: "no connnection")
+			}
+			// no parameters, want binary back
+			let rawResult: OpaquePointer? =  PQexecParams(pgcon, query, 0, nil, nil, nil, nil, 1)
+			guard let result = rawResult else { throw PostgreSQLStatusErrors.badResponse }
+			return PGResult(result: result, connection: self)
+		}
+	}
+
 	// MARK: - Notify/Listen
 
 	/// Creates a dispatch read source for this connection that will call `callback` on `queue` when a notification is received
