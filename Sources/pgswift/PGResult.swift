@@ -18,6 +18,9 @@ public class PGResult {
 	let result: OpaquePointer
 	weak var connection: Connection?
 	public let status: Status
+	private let dateFormatter: ISO8601DateFormatter
+	private let timeFormatter: ISO8601DateFormatter
+	private let timestampFormatter: DateFormatter
 	
 	public var statusMessage: String { return String(cString: PQresStatus(status.pgStatus)) }
 	public var errorMessage: String { return String(cString: PQresultErrorMessage(result)) }
@@ -50,6 +53,15 @@ public class PGResult {
 		columnNames = (0..<colCount).map { return String(utf8String: PQfname(result, Int32($0))) ?? "" }
 		columnFormats = (0..<colCount).map { return PQfformat(result, Int32($0))  == 0 ? .string : .binary }
 		columnTypes = (0..<colCount).map { return PGType(rawValue: PQftype(result, Int32($0))) ?? .unsupported }
+		dateFormatter = ISO8601DateFormatter()
+		dateFormatter.formatOptions = [.withFullDate, .withDashSeparatorInDate]
+		timeFormatter = ISO8601DateFormatter()
+		timeFormatter.formatOptions = [.withTime, ]
+		timestampFormatter = DateFormatter()
+		timestampFormatter.dateFormat = " yyyy-MM-dd H:m:s.SSSSSSxx"
+		timestampFormatter.locale = Locale(identifier: "en_US_POSIX")
+		timestampFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+//		timestampFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 	}
 	
 	deinit {
@@ -67,6 +79,7 @@ public class PGResult {
 	/// - Throws: if an invalid column number
 	public func getDataValue(row: Int, column: Int) throws -> Data? {
 		guard column < columnNames.count else { throw PostgreSQLError(code: .numericValueOutOfRange, connection: connection!) }
+		precondition(columnFormats[column] == .binary) // FIXME: should support sting values
 		let size = Int(PQgetlength(result, Int32(row), Int32(column)))
 		guard let value = try setupValue(row: row, column: column) else { return nil }
 		let rawValue = UnsafeRawPointer(value)
@@ -99,6 +112,9 @@ public class PGResult {
 	public func getBoolValue(row: Int, column: Int) throws -> Bool? {
 		guard columnTypes[column].nativeType == .bool else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
 		guard let rawValue = try setupValue(row: row, column: column) else { return nil }
+		if columnFormats[column] == .string {
+			return rawValue.pointee == "t".utf8CString[0]
+		}
 		return rawValue.withMemoryRebound(to: Bool.self, capacity: 1) { $0.pointee }
 	}
 	
@@ -112,6 +128,23 @@ public class PGResult {
 	public func getDateValue(row: Int, column: Int) throws -> Date? {
 		guard columnTypes[column].nativeType == .date else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
 		guard let rawValue = try setupValue(row: row, column: column) else { return nil }
+		if columnFormats[column] == .string {
+			guard let dateStr = try getStringValue(row: row, column: column) else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
+			switch columnTypes[column] {
+				case .date:
+					return dateFormatter.date(from: dateStr)
+				case .time:
+					fallthrough
+				case .timetz:
+					return timeFormatter.date(from: dateStr)
+				case .timestamp:
+					fallthrough
+				case .timestamptz:
+					return timestampFormatter.date(from: dateStr)
+				default:
+					throw PostgreSQLStatusErrors.unsupportedDataFormat
+			}
+		}
 		let days = Int32(bigEndian: rawValue.withMemoryRebound(to: Int32.self, capacity: 1) { $0.pointee })
 		let timeInterval = TimeInterval(days * secondsInDay)
 		return Date(timeIntervalSince1970: timeInterval + timeIntervalBetween1970AndPostgresReferenceDate)
@@ -125,7 +158,11 @@ public class PGResult {
 	/// - Returns: the value as an integer, or nil if NULL
 	/// - Throws: if native format is not an integer, or if an invalid column number
 	public func getIntValue(row: Int, column: Int) throws -> Int? {
-		guard columnTypes[column].nativeType == .int else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
+		if columnFormats[column] == .string {
+			guard let val = try? getStringValue(row: row, column: column), val.count > 0 else { return nil }
+			return Int(val)
+		}
+		guard column < columnCount, columnTypes[column].nativeType == .int else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
 		guard let rawValue = try setupValue(row: row, column: column) else { return nil }
 		switch columnTypes[column] {
 		case .int2:
@@ -147,6 +184,10 @@ public class PGResult {
 	/// - Returns: the value as a float, or nil if NULL
 	/// - Throws: if native format is not float, or if an invalid column number
 	public func getFloatValue(row: Int, column: Int) throws -> Float? {
+		if columnFormats[column] == .string {
+			guard let val = try? getStringValue(row: row, column: column), val.count > 0 else { return nil }
+			return Float(val)
+		}
 		guard let rawValue = try setupValue(row: row, column: column) else { return nil }
 		let uintValue = rawValue.withMemoryRebound(to: UInt32.self, capacity: 1) { ptr in
 			return ptr.pointee
@@ -162,6 +203,10 @@ public class PGResult {
 	/// - Returns: the value as a double, or nil if NULL
 	/// - Throws: if native format is not an double or float, or if an invalid column number
 	public func getDoubleValue(row: Int, column: Int) throws -> Double? {
+		if columnFormats[column] == .string {
+			guard let val = try? getStringValue(row: row, column: column), val.count > 0 else { return nil }
+			return Double(val)
+		}
 		guard let rawValue = try setupValue(row: row, column: column) else { return nil }
 		let uintValue = rawValue.withMemoryRebound(to: UInt64.self, capacity: 1) { ptr in
 			return ptr.pointee
