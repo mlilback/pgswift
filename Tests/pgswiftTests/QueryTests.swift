@@ -83,6 +83,9 @@ final class QueryTests: XCTestCase {
 			XCTAssertTrue(try result.getBoolValue(row: 0, column: 5)!)
 			XCTAssertEqual(try result.getFloatValue(row: 0, column: 6)!, 2.34, accuracy: 0.01)
 			XCTAssertEqual(try result.getDoubleValue(row: 0, column: 7)!, 0.000454, accuracy: 0.00001)
+			let nameByName: String? = try result.getValue(row: 0, columnName: "name")
+			XCTAssertNotNil(nameByName)
+			XCTAssertEqual(nameByName!, "mark")
 //			let signup = try result.getDateValue(row: 0, column: 4)!
 //			print("signup = \(String(describing: signup))")
 			XCTAssertEqual(con.lastErrorMessage, "")

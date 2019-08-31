@@ -108,6 +108,20 @@ public class PGResult {
 		}
 	}
 	
+	/// finds the index of the first column matching columnName  then calls getValue(from:column:) with it
+	///
+	/// - Parameters:
+	///   - row: row number
+	///   - columnName: column name
+	/// - Returns: the value
+	/// - Throws: if any parameter is invalid, if there is no column with the specified name,
+	///           or if the column's NativeType doesn't match T
+	public func getValue<T>(row: Int, columnName: String) throws -> T? {
+		let possibleColNum = columnNames.firstIndex { $0.caseInsensitiveCompare(columnName) == .orderedSame }
+		guard let colNum = possibleColNum else { throw PostgreSQLStatusErrors.invalidColumnName }
+		return try getValue(row: row, column: colNum)
+	}
+	
 	/// Gets the specified value as a data object.
 	///
 	/// - Parameters:
