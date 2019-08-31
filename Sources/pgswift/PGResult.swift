@@ -11,11 +11,6 @@ import CLibpq
 public class PGResult {
 	// MARK: - properties
 	
-	private let secondsInDay: Int32 = 24 * 60 * 60
-	// Reference date in Postgres is 2000-01-01, while in Swift it is 2001-01-01. There were 366 days in the year 2000.
-	private let timeIntervalBetween1970AndPostgresReferenceDate = Date.timeIntervalBetween1970AndReferenceDate - TimeInterval(366 * 24 * 60 * 60)
-	private let ourReferenceDate: Date
-
 	private let result: OpaquePointer
 	weak var connection: Connection?
 	public let status: Status
@@ -59,7 +54,6 @@ public class PGResult {
 		columnNames = (0..<colCount).map { return String(utf8String: PQfname(result, Int32($0))) ?? "" }
 		columnFormats = (0..<colCount).map { return PQfformat(result, Int32($0))  == 0 ? .string : .binary }
 		columnTypes = (0..<colCount).map { return PGType(rawValue: PQftype(result, Int32($0))) ?? .unsupported }
-		ourReferenceDate = Date(timeIntervalSince1970: timeIntervalBetween1970AndPostgresReferenceDate)
 		dateFormatter = ISO8601DateFormatter()
 		dateFormatter.formatOptions = [.withFullDate, .withDashSeparatorInDate]
 		timeFormatter = ISO8601DateFormatter()
@@ -215,21 +209,21 @@ public class PGResult {
 		if columnTypes[column] == .date {
 			if connection?.hasIntegerDatetimes ?? true {
 				let days = Int32(bigEndian: rawValue.withMemoryRebound(to: Int32.self, capacity: 1) { $0.pointee })
-				let timeInterval = TimeInterval(days * secondsInDay)
-				return Date(timeInterval: timeInterval, since: ourReferenceDate)
+				let timeInterval = TimeInterval(days * BinaryUtilities.DateTime.secondsInDay)
+				return Date(timeInterval: timeInterval, since: BinaryUtilities.DateTime.referenceDate)
 			} else {
 				let seconds = BinaryUtilities.parseFloat64(value: rawValue)
-				return Date(timeInterval: seconds, since: ourReferenceDate)
+				return Date(timeInterval: seconds, since: BinaryUtilities.DateTime.referenceDate)
 			}
 		}
 		// otherwise, it is formatted like a timestamp
 		if connection?.hasIntegerDatetimes ?? true {
 			let microseconds = Int64(bigEndian: rawValue.withMemoryRebound(to: Int64.self, capacity: 1) { $0.pointee })
 			let timeInterval = TimeInterval(Double(microseconds) / 1000000.0)
-			return Date(timeInterval: timeInterval, since: ourReferenceDate)
+			return Date(timeInterval: timeInterval, since: BinaryUtilities.DateTime.referenceDate)
 		} else {
 			let seconds = BinaryUtilities.parseFloat64(value: rawValue)
-			return Date(timeInterval: seconds, since: ourReferenceDate)
+			return Date(timeInterval: seconds, since: BinaryUtilities.DateTime.referenceDate)
 		}
 	}
 	
