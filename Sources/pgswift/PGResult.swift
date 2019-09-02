@@ -212,7 +212,7 @@ public class PGResult {
 				let timeInterval = TimeInterval(days * BinaryUtilities.DateTime.secondsInDay)
 				return Date(timeInterval: timeInterval, since: BinaryUtilities.DateTime.referenceDate)
 			} else {
-				let seconds = BinaryUtilities.parseFloat64(value: rawValue)
+				let seconds = BinaryUtilities.parseDouble(value: rawValue)
 				return Date(timeInterval: seconds, since: BinaryUtilities.DateTime.referenceDate)
 			}
 		}
@@ -222,7 +222,7 @@ public class PGResult {
 			let timeInterval = TimeInterval(Double(microseconds) / 1000000.0)
 			return Date(timeInterval: timeInterval, since: BinaryUtilities.DateTime.referenceDate)
 		} else {
-			let seconds = BinaryUtilities.parseFloat64(value: rawValue)
+			let seconds = BinaryUtilities.parseDouble(value: rawValue)
 			return Date(timeInterval: seconds, since: BinaryUtilities.DateTime.referenceDate)
 		}
 	}

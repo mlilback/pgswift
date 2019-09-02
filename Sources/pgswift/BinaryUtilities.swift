@@ -20,12 +20,45 @@ extension Double {
 	}
 }
 
+extension String {
+	enum ExtendedEncoding {
+		case hexadecimal
+	}
+	
+	/// If this string is valid hex code (with optional 0x prefix), returns a Data representation
+	///
+	/// - Parameter encoding: self's format. .hexadecimal for now
+	/// - Returns: returns the converted Data, or nil if not valid hex
+	func data(using encoding:ExtendedEncoding) -> Data? {
+		let hexStr = self.dropFirst(self.hasPrefix("0x") ? 2 : 0)
+		
+		guard hexStr.count % 2 == 0 else { return nil }
+		
+		var newData = Data(capacity: hexStr.count/2)
+		
+		var indexIsEven = true
+		for i in hexStr.indices {
+			if indexIsEven {
+				let byteRange = i...hexStr.index(after: i)
+				guard let byte = UInt8(hexStr[byteRange], radix: 16) else { return nil }
+				newData.append(byte)
+			}
+			indexIsEven.toggle()
+		}
+		return newData
+	}
+}
+
+/// static methods for working with binary data
 struct BinaryUtilities {
+	/// a DateFormatter using 'YYYY-MM-DD' as its format
 	static let dateFormatter: ISO8601DateFormatter = {
 		var fmt = ISO8601DateFormatter()
 		fmt.formatOptions = [.withFullDate, .withDashSeparatorInDate]
 		return fmt
 	}()
+	
+	/// static properties related to dates and times working with PostgreSQL
 	enum DateTime {
 		static let secondsInDay: Int32 = 24 * 60 * 60
 		// Reference date in Postgres is 2000-01-01, while in Swift it is 2001-01-01. There were 366 days in the year 2000.
@@ -33,13 +66,11 @@ struct BinaryUtilities {
 		static let referenceDate = Date(timeIntervalSince1970: timeIntervalBetween1970AndPostgresReferenceDate)
 	}
 	
-//	static func convert<T>(_ value: UnsafeMutablePointer<Int8>) -> T {
-//		return value.withMemoryRebound(to: T.self, capacity: 1) {
-//			$0.pointee
-//		}
-//	}
-
-	/// The returned Pointer is owned by the caller and needs .dealloc() called
+	/// converts a value to binary data
+	/// The returned pointer is owned by the caller and needs .dealloc() called
+	///
+	/// - Parameter value: the value to convert
+	/// - Returns: a mutable pointer and the current length
 	static func valueToBytes<T>(_ value: inout T) -> (UnsafeMutablePointer<Int8>, Int) {
 		let size = MemoryLayout.size(ofValue: value)
 		return withUnsafePointer(to: &value) { valuePointer in
@@ -104,14 +135,21 @@ struct BinaryUtilities {
 			let realBytes = UnsafeMutableRawPointer(bytes).bindMemory(to: Int8.self, capacity: data.count)
 			return (UnsafePointer(realBytes), data.count)
 		case is Date:
-			return try dateToPointer(date: value as! Date, type: asType, asIntegers: datesAsIntegers)
+			return dateToPointer(date: value as! Date, type: asType, asIntegers: datesAsIntegers)
 		default:
 			throw PostgreSQLStatusErrors.unsupportedDataFormat
 		}
 	
 	}
 	
-	static func dateToPointer(date: Date, type: PGType, asIntegers: Bool) throws -> (UnsafePointer<Int8>, Int) {
+	/// Converts a date object to data to bind to a query
+	///
+	/// - Parameters:
+	///   - date: the date
+	///   - type: the type of the column this type will be inserted into
+	///   - asIntegers: true if dates are stored as integers
+	/// - Returns: the pointer and its length
+	static func dateToPointer(date: Date, type: PGType, asIntegers: Bool) -> (UnsafePointer<Int8>, Int) {
 		if type == .date {
 			// use strings for date values
 			let str = dateFormatter.string(from: date)
@@ -132,6 +170,10 @@ struct BinaryUtilities {
 		}
 	}
 	
+	/// converts a string to a pointer
+	///
+	/// - Parameter str: the string to convert
+	/// - Returns: the pointer and its length
 	static func stringToPointer(_ str: String) -> (UnsafePointer<Int8>, Int) {
 		// add on a extra byte for null terminator
 		let data = UnsafeMutablePointer<Int8>.allocate(capacity: str.count + 1)
@@ -143,7 +185,11 @@ struct BinaryUtilities {
 
 	}
 	
-	static func parseFloat64(value: UnsafePointer<UInt8>) -> Double {
+	/// parses a pointer containg a Double value
+	///
+	/// - Parameter value: pointer to a double value
+	/// - Returns: the parsed double
+	static func parseDouble(value: UnsafePointer<UInt8>) -> Double {
 		let uintValue = value.withMemoryRebound(to: UInt64.self, capacity: 1) { ptr in
 			return ptr.pointee
 		}
