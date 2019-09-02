@@ -97,7 +97,7 @@ public class PGResult {
 		case .string:
 			return try getStringValue(row: row, column: column) as? T
 		case .date:
-			return try getDataValue(row: row, column: column) as? T
+			return try getDateValue(row: row, column: column) as? T
 		case .data:
 			return try getDataValue(row: row, column: column) as? T
 		}
