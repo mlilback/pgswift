@@ -70,6 +70,7 @@ struct BinaryUtilities {
 		static let timeFormatter: DateFormatter = {
 			var fmt = DateFormatter()
 			fmt.locale = Locale(identifier: "en_US_POSIX")
+			fmt.timeZone = TimeZone(secondsFromGMT: 0)
 			fmt.dateFormat = "HH:mm:ss.SSSS"
 			return fmt
 		}()
@@ -77,6 +78,7 @@ struct BinaryUtilities {
 		/// a Timestamp formatter
 		static let timestampFormatter: ISO8601DateFormatter = {
 			var fmt = ISO8601DateFormatter()
+			fmt.timeZone = TimeZone(secondsFromGMT: 0)
 			fmt.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 			return fmt
 		}()
