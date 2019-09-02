@@ -103,7 +103,7 @@ final class QueryTests: BaseTest {
 				try QueryParameter(type: .varchar, value: "Julia", connection: con),
 				try QueryParameter(type: .int4, value: 24, connection: con),
 				try QueryParameter(type: .bool, value: true, connection: con),
-				try QueryParameter(type: .float, value: Float(1.2), connection: con),
+				try QueryParameter(type: .double, value: Double(1.2), connection: con),
 				// test coverage for internal initializer
 				try QueryParameter(type: .date, value: signDate, connection: con),
 				try QueryParameter(type: .double, value: Double(0.032), datesAsIntegers: con.hasIntegerDatetimes),
