@@ -79,6 +79,7 @@ public class PGResult {
 	/// - Returns: the value
 	/// - Throws: if any parameter is invalid, if the column's NativeType doesn't match T
 	public func getValue<T>(row: Int, column: Int) throws -> T? {
+		guard PQgetisnull(result, Int32(row), Int32(column)) == 0 else { return nil }
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 		guard row < rowCount else { throw PostgreSQLStatusErrors.invalidRowNumber }
 		guard columnTypes[column].nativeType.metaType() == T.self
