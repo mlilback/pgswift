@@ -69,9 +69,14 @@ final class QueryTests: BaseTest {
 			let str: String? = try result.getValue(row: 1, columnName: "name")
 			XCTAssertNotNil(str)
 			XCTAssertEqual(str!, "kenny")
-			let sdate = try result.getDateValue(row: 0, column: 3)
+			XCTAssertEqual(try result.getValue(row: 0, columnName: "member"), true)
+			XCTAssertEqual(try result.getValue(row: 0, columnName: "fval")!, Double(2.34), accuracy: 0.00001)
+			XCTAssertEqual(try result.getValue(row: 0, columnName: "dval")!, Double(0.000454), accuracy: 0.00001)
+			let int2: Int = try result.getValue(row: 0, columnName: "smint")!
+			XCTAssertEqual(int2, 3)
+			let sdate: Date = try result.getValue(row: 0, columnName: "signupDate")!
 			XCTAssertNotNil(sdate)
-			let onlyDate = sdate!.addingTimeInterval(12.0 * 60.0 * 60.0)
+			let onlyDate = sdate.addingTimeInterval(12.0 * 60.0 * 60.0)
 			XCTAssertEqual(dateFormatter!.string(from: onlyDate), "1/8/2019")
 			let expectedBlob = "0a323621".data(using: .hexadecimal)!
 			let rdata: Data = try result.getValue(row: 0, columnName: "thumb")!
