@@ -69,18 +69,18 @@ struct BinaryUtilities {
 			return (UnsafePointer(bytes), 1)
 		case is Int:
 			// integers are handled based on the desired type (2,4,8 byte)
-			let intValue = (value as! Int).bigEndian
+			let intValue = value as! Int
 			switch asType {
 			case .int2:
-				var i2 = Int16(intValue)
+				var i2 = Int16(intValue).bigEndian
 				let (i2val, i2len) =  valueToBytes(&i2)
 				return (UnsafePointer<Int8>(i2val), i2len)
 			case .int4:
-				var i4 = Int32(intValue)
+				var i4 = Int32(intValue).bigEndian
 				let (i4val, i4len) =  valueToBytes(&i4)
 				return (UnsafePointer<Int8>(i4val), i4len)
 			case .int8:
-				var intVal = intValue
+				var intVal = intValue.bigEndian
 				let (ival, ilen) = valueToBytes(&intVal)
 				return (UnsafePointer<Int8>(ival), ilen)
 			default: fatalError()
