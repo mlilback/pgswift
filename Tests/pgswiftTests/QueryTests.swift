@@ -64,6 +64,9 @@ final class QueryTests: BaseTest {
 			XCTAssertEqual(try result.getStringValue(row: 0, column: 1), "mark")
 			XCTAssertEqual(try result.getIntValue(row: 1, column: 2), 44)
 			XCTAssertNil(try result.getIntValue(row: 2, column: 2))
+			let str: String? = try result.getValue(row: 1, columnName: "name")
+			XCTAssertNotNil(str)
+			XCTAssertEqual(str!, "kenny")
 			let sdate = try result.getDateValue(row: 0, column: 3)
 			XCTAssertNotNil(sdate)
 			let onlyDate = sdate!.addingTimeInterval(12.0 * 60.0 * 60.0)
@@ -83,25 +86,30 @@ final class QueryTests: BaseTest {
 	func testParamQuery() {
 		guard let con = connection else { XCTFail(); return }
 		XCTAssert(con.isConnected)
-		let query = "INSERT INTO person (id, name, age, member, fval, dval) VALUES ($1, $2, $3, $4, $5, $6)"
+		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval) VALUES ($1, $2, $3, $4, $5, $6, $7)"
 		do {
+			let signDate = dateFormatter!.date(from: "11-21-2018")!
 			let params: [QueryParameter?] = [
 				try QueryParameter(type: .int8, value: 50, connection: con),
 				try QueryParameter(type: .varchar, value: "Julia", connection: con),
 				try QueryParameter(type: .int8, value: 24, connection: con),
 				try QueryParameter(type: .bool, value: true, connection: con),
 				try QueryParameter(type: .float, value: Float(1.2), connection: con),
-				try QueryParameter(type: .double, value: Double(0.032), connection: con)
+				// test coverage for internal initializer
+				try QueryParameter(type: .date, value: signDate, connection: con),
+				try QueryParameter(type: .double, value: Double(0.032), datesAsIntegers: con.hasIntegerDatetimes),
 			]
 			let result = try con.execute(query: query, parameters: params)
-			XCTAssert(result.wasSuccessful)
+			if !result.wasSuccessful {
+				XCTFail("insert failed with error: \(result.errorMessage)")
+			}
 			XCTAssertEqual(result.rowsAffected, "1")
 			// TODO: select the row and make sure it was inserted properly
 		} catch let err as PostgreSQLError {
 			print(err.localizedDescription)
 			XCTFail()
 		} catch {
-			XCTFail("unknown error")
+			XCTFail("unknown error: \(error)")
 		}
 	}
 	

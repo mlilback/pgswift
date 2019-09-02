@@ -8,7 +8,19 @@
 import Foundation
 
 public final class QueryParameter {
+	/// the type this parameter was requested to be
 	public let valueType: PGType
+	/// the type that postgresql should be told this is
+	public var effectiveType: PGType {
+		switch valueType {
+		case .date: return .varchar
+		default: return valueType
+		}
+	}
+	var columnFormat: PGResult.ColumnFormat {
+		if valueType == .date { return .string }
+		return .binary
+	}
 	private let bytes: UnsafePointer<Int8>
 	public let valueCount: Int
 	

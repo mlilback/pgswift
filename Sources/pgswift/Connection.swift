@@ -160,7 +160,7 @@ public final class Connection {
 			if let param = aParam {
 				types.append(param.valueType.rawValue)
 				lengths.append(Int32(param.valueCount))
-				formats.append(1)
+				formats.append(Int32(param.columnFormat.rawValue))
 				values.append(param.valueBytes)
 			} else {
 				types.append(0)

@@ -21,6 +21,11 @@ extension Double {
 }
 
 struct BinaryUtilities {
+	static let dateFormatter: ISO8601DateFormatter = {
+		var fmt = ISO8601DateFormatter()
+		fmt.formatOptions = [.withFullDate, .withDashSeparatorInDate]
+		return fmt
+	}()
 	enum DateTime {
 		static let secondsInDay: Int32 = 24 * 60 * 60
 		// Reference date in Postgres is 2000-01-01, while in Swift it is 2001-01-01. There were 366 days in the year 2000.
@@ -28,11 +33,11 @@ struct BinaryUtilities {
 		static let referenceDate = Date(timeIntervalSince1970: timeIntervalBetween1970AndPostgresReferenceDate)
 	}
 	
-	static func convert<T>(_ value: UnsafeMutablePointer<Int8>) -> T {
-		return value.withMemoryRebound(to: T.self, capacity: 1) {
-			$0.pointee
-		}
-	}
+//	static func convert<T>(_ value: UnsafeMutablePointer<Int8>) -> T {
+//		return value.withMemoryRebound(to: T.self, capacity: 1) {
+//			$0.pointee
+//		}
+//	}
 
 	/// The returned Pointer is owned by the caller and needs .dealloc() called
 	static func valueToBytes<T>(_ value: inout T) -> (UnsafeMutablePointer<Int8>, Int) {
@@ -48,6 +53,7 @@ struct BinaryUtilities {
 
 	/// Returns bytes to use as binary input for the specified value
 	/// The returned pointer is owned by the caller and needs .dealloc() called
+	/// The binary format for .date types is string
 	///
 	/// - Parameters:
 	///   - value: An object that is one of the NativeTypes
@@ -89,12 +95,7 @@ struct BinaryUtilities {
 			return (UnsafePointer<Int8>(dval), dlen)
 		case is String:
 			let str = value as! String
-			let data = UnsafeMutablePointer<Int8>.allocate(capacity: str.count)
-			str.utf8CString.withUnsafeBytes { rawBuffer in
-				let bufferPtr = rawBuffer.bindMemory(to: Int8.self)
-				data.initialize(from: bufferPtr.baseAddress!, count: str.count)
-			}
-			return (UnsafePointer<Int8>(data), str.count)
+			return stringToPointer(str)
 		case is Data:
 			// what a pain in the ass to what used to just be a call to .bytes()
 			let data = value as! Data
@@ -111,14 +112,13 @@ struct BinaryUtilities {
 	}
 	
 	static func dateToPointer(date: Date, type: PGType, asIntegers: Bool) throws -> (UnsafePointer<Int8>, Int) {
-		let cal = Calendar.current
-		var dateVal = date
 		if type == .date {
-			// strip out time components
-			let dateComps = cal.dateComponents([.year, .month, .day], from: date)
-			dateVal = cal.date(from: dateComps)!
+			// use strings for date values
+			let str = dateFormatter.string(from: date)
+			let (data, len) = stringToPointer(str)
+			return (data, len + 1) // add null terminator
 		}
-		let interval = dateVal.timeIntervalSince(BinaryUtilities.DateTime.referenceDate)
+		let interval = date.timeIntervalSince(BinaryUtilities.DateTime.referenceDate)
 		if asIntegers {
 			let micro = Int64(interval * 1_000_000)
 			var value = micro.bigEndian
@@ -130,6 +130,17 @@ struct BinaryUtilities {
 			let (bytes, len) = valueToBytes(&value)
 			return (UnsafePointer<Int8>(bytes), len)
 		}
+	}
+	
+	static func stringToPointer(_ str: String) -> (UnsafePointer<Int8>, Int) {
+		// add on a extra byte for null terminator
+		let data = UnsafeMutablePointer<Int8>.allocate(capacity: str.count + 1)
+		str.utf8CString.withUnsafeBytes { rawBuffer in
+			let bufferPtr = rawBuffer.bindMemory(to: Int8.self)
+			data.initialize(from: bufferPtr.baseAddress!, count: str.count + 1)
+		}
+		return (UnsafePointer<Int8>(data), str.count)
+
 	}
 	
 	static func parseFloat64(value: UnsafePointer<UInt8>) -> Double {
