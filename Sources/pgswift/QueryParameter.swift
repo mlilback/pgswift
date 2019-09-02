@@ -41,15 +41,14 @@ public final class QueryParameter {
 	/// - Throws: If value is not the appropriate type for valueType
 	public convenience init(type valueType: PGType, value: Any, connection: Connection) throws {
 		try self.init(type: valueType, value: value, datesAsIntegers: connection.hasIntegerDatetimes)
-//		self.valueType = valueType
-//		let dataType = valueType.nativeType.metaType()
-//		guard type(of: value) == dataType
-//			else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
-//		(bytes, valueCount) = try BinaryUtilities.bytes(forValue: value, asType: valueType, datesAsIntegers: connection.hasIntegerDatetimes)
 	}
 
 	/// intenral constructor that passes the single dateAsInteger value instead of the whole connection
 	internal init(type valueType: PGType, value: Any, datesAsIntegers: Bool) throws {
+		// FIXME: this doesn't seem like the right way to do this, but can't call our own methods. Maybe something in NativeType?
+		if valueType == .float, value is Float {
+			throw PostgreSQLStatusErrors.floatsMustbeDoubles
+		}
 		self.valueType = valueType
 		let dataType = valueType.nativeType.metaType()
 		guard type(of: value) == dataType
