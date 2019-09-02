@@ -74,10 +74,16 @@ final class QueryTests: BaseTest {
 			XCTAssertEqual(try result.getValue(row: 0, columnName: "dval")!, Double(0.000454), accuracy: 0.00001)
 			let int2: Int = try result.getValue(row: 0, columnName: "smint")!
 			XCTAssertEqual(int2, 3)
+			
 			let sdate: Date = try result.getValue(row: 0, columnName: "signupDate")!
 			XCTAssertNotNil(sdate)
 			let onlyDate = sdate.addingTimeInterval(12.0 * 60.0 * 60.0)
 			XCTAssertEqual(dateFormatter!.string(from: onlyDate), "1/8/2019")
+			
+			let onlyTime: Date = try result.getValue(row: 0, columnName: "atime")!
+			let timeStr = BinaryUtilities.DateTime.timeFormatter.string(from: onlyTime)
+			XCTAssertEqual(timeStr, "11:31:21.0540") // formatter returns 4 digits, so add 0 on end
+			
 			let expectedBlob = "0a323621".data(using: .hexadecimal)!
 			let rdata: Data = try result.getValue(row: 0, columnName: "thumb")!
 			XCTAssertEqual(rdata, expectedBlob)

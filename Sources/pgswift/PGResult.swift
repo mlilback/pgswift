@@ -208,24 +208,20 @@ public class PGResult {
 		}
 		guard let rawValue = try setupValue(row: row, column: column) else { return nil }
 		if columnTypes[column] == .date {
-			if connection?.hasIntegerDatetimes ?? true {
-				let days = Int32(bigEndian: rawValue.withMemoryRebound(to: Int32.self, capacity: 1) { $0.pointee })
-				let timeInterval = TimeInterval(days * BinaryUtilities.DateTime.secondsInDay)
-				return Date(timeInterval: timeInterval, since: BinaryUtilities.DateTime.referenceDate)
-			} else {
-				let seconds = BinaryUtilities.parseDouble(value: rawValue)
-				return Date(timeInterval: seconds, since: BinaryUtilities.DateTime.referenceDate)
-			}
+			let days = Int32(bigEndian: rawValue.withMemoryRebound(to: Int32.self, capacity: 1) { $0.pointee })
+			let timeInterval = TimeInterval(days * BinaryUtilities.DateTime.secondsInDay)
+			return Date(timeInterval: timeInterval, since: BinaryUtilities.DateTime.referenceDate)
+		} else if columnTypes[column] == .time {
+			let microseconds = Int64(bigEndian: rawValue.withMemoryRebound(to: Int64.self, capacity: 1) { ptr in
+				return ptr.pointee
+			})
+			let interval = TimeInterval(microseconds) / 1_000_000
+			return Date(timeInterval: interval, since: BinaryUtilities.DateTime.referenceDate)
 		}
 		// otherwise, it is formatted like a timestamp
-		if connection?.hasIntegerDatetimes ?? true {
-			let microseconds = Int64(bigEndian: rawValue.withMemoryRebound(to: Int64.self, capacity: 1) { $0.pointee })
-			let timeInterval = TimeInterval(Double(microseconds) / 1000000.0)
-			return Date(timeInterval: timeInterval, since: BinaryUtilities.DateTime.referenceDate)
-		} else {
-			let seconds = BinaryUtilities.parseDouble(value: rawValue)
-			return Date(timeInterval: seconds, since: BinaryUtilities.DateTime.referenceDate)
-		}
+		let seconds = BinaryUtilities.parseDouble(value: rawValue)
+		let interval = TimeInterval(seconds)
+		return Date(timeInterval: interval, since: BinaryUtilities.DateTime.referenceDate)
 	}
 	
 	/// Gets the specified value as an integer if columnType.nativeType == .int
