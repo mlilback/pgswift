@@ -21,49 +21,7 @@ extension Date {
 	}
 }
 
-final class QueryTests: XCTestCase {
-	var connection: Connection?
-	var dateFormatter: DateFormatter?
-	var timestampFormatter = DateFormatter()
-	
-	override func setUp() {
-		let basicInfo = ConnectInfo(host: "localhost", port: "5433", user: "test", password: "secret", dbname: "test", sslMode: .allow)
-		dateFormatter = DateFormatter()
-		dateFormatter?.locale = Locale(identifier: "en_US_POSIX")
-//		dateFormatter?.dateStyle = .short
-//		dateFormatter?.timeStyle = .none
-		dateFormatter?.setLocalizedDateFormatFromTemplate("M/d/yyyy")
-//		dateFormatter?.timeZone = TimeZone.current
-		timestampFormatter.dateFormat = " yyyy-MM-dd HH:m:s.SSSSx"
-		timestampFormatter.locale = Locale(identifier: "en_US_POSIX")
-		timestampFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-
-		connection = Connection(connectInfo: basicInfo)
-		try! connection?.open()
-		XCTAssert(connection?.isConnected ?? false)
-		let result = try! connection?.execute(query: """
-			CREATE TABLE person (
-				id integer not null primary key,
-				name varchar(20) not null,
-				age int,
-				signupDate date DEFAULT NOW(),
-				signupStamp timestamp with time zone default now(),
-				member boolean default false,
-				fval float,
-				dval double precision);
-			INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454);
-			INSERT INTO person (id, name, age, signupDate) VALUES (2, 'kenny', 44, '2019-03-11');
-			INSERT INTO person (id, name) VALUES (3, 'brinley');
-		""")
-		let status = result!.status
-		print("stat=\(status), lastError=\(result!.errorMessage)")
-		XCTAssert(result!.wasSuccessful)
-	}
-	
-	override func tearDown() {
-		try! connection?.execute(query: "drop table person")
-		connection?.close()
-	}
+final class QueryTests: BaseTest {
 	
 	func testBasicQuery() {
 		guard let con = connection else { XCTFail(); return }
@@ -122,6 +80,31 @@ final class QueryTests: XCTestCase {
 		}
 	}
 	
+	func testParamQuery() {
+		guard let con = connection else { XCTFail(); return }
+		XCTAssert(con.isConnected)
+		let query = "INSERT INTO person (id, name, age, member, fval, dval) VALUES ($1, $2, $3, $4, $5, $6)"
+		do {
+			let params: [QueryParameter?] = [
+				try QueryParameter(type: .int8, value: 50, connection: con),
+				try QueryParameter(type: .varchar, value: "Julia", connection: con),
+				try QueryParameter(type: .int8, value: 24, connection: con),
+				try QueryParameter(type: .bool, value: true, connection: con),
+				try QueryParameter(type: .float, value: Float(1.2), connection: con),
+				try QueryParameter(type: .double, value: Double(0.032), connection: con)
+			]
+			let result = try con.execute(query: query, parameters: params)
+			XCTAssert(result.wasSuccessful)
+			XCTAssertEqual(result.rowsAffected, "1")
+			// TODO: select the row and make sure it was inserted properly
+		} catch let err as PostgreSQLError {
+			print(err.localizedDescription)
+			XCTFail()
+		} catch {
+			XCTFail("unknown error")
+		}
+	}
+	
 	func testNotifications() {
 		let channelName = "foobar"
 		let payload = "barfoo"
@@ -158,7 +141,24 @@ final class QueryTests: XCTestCase {
 			XCTFail("unknown error")
 		}
 	}
+
+	override var initialSQL: String { return """
+		CREATE TABLE person (
+		id integer not null primary key,
+		name varchar(20) not null,
+		age int,
+		signupDate date DEFAULT NOW(),
+		signupStamp timestamp with time zone default now(),
+		member boolean default false,
+		fval float,
+		dval double precision);
+		INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454);
+		INSERT INTO person (id, name, age, signupDate) VALUES (2, 'kenny', 44, '2019-03-11');
+		INSERT INTO person (id, name) VALUES (3, 'brinley');
+		""" }
 	
+	override var cleanupSQL: String? { return "drop table person" }
+
 	static var allTests = [
 		("testBasicQuery", testBasicQuery),
 		("testBinaryQuery", testBinaryQuery),

@@ -146,6 +146,33 @@ public final class Connection {
 		return String(cString: value) == "on"
 	}
 	
+	/// calls body with properly formatted arrays to pass to PQexecParams
+	private func with<Result>(parameters: [QueryParameter?], body: ([UInt32], [UnsafePointer<Int8>?], UnsafePointer<Int32>, UnsafePointer<Int32>) -> Result) -> Result
+	{
+		var values = [UnsafePointer<Int8>?]()
+		var lengths = [Int32]()
+		var formats = [Int32]()
+		var types = [UInt32]()
+		
+		defer { values.forEach { $0?.deallocate() } }
+		
+		parameters.forEach { aParam in
+			if let param = aParam {
+				types.append(param.valueType.rawValue)
+				lengths.append(Int32(param.valueCount))
+				formats.append(1)
+				values.append(param.valueBytes)
+			} else {
+				types.append(0)
+				lengths.append(0)
+				formats.append(0)
+				values.append(nil)
+			}
+		}
+		
+		return body(types, values, lengths, formats)
+	}
+	
 	// MARK: - sql execution
 	
 	/// execute query without locking (to be called when already locked)
@@ -175,6 +202,27 @@ public final class Connection {
 		}
 	}
 
+	@discardableResult
+	/// Execute a query with parameters
+	///
+	/// - Parameters:
+	///   - query: the query string with placeholders ($1,$2, etc.) for each parameter
+	///   - parameters: array of QueryParameters
+	/// - Returns: the results of the query
+	/// - Throws: if connection not open, don't get a valid response, query parameter mismatch
+	public func execute(query: String, parameters: [QueryParameter?]) throws -> PGResult {
+		return try conQueue.sync {
+			guard isConnectedRaw, let pgcon = pgConnection else {
+				throw PostgreSQLError(code: .connectionDoesNotExist , errorMessage: "no connnection")
+			}
+			let rawResult: OpaquePointer? = with(parameters: parameters) { (types, values, lengths, formats) in
+				return PQexecParams(pgcon, query, Int32(parameters.count), types, values, lengths, formats, 1)
+			}
+			guard let result = rawResult else { throw PostgreSQLStatusErrors.badResponse }
+			return PGResult(result: result, connection: self)
+		}
+	}
+	
 	@discardableResult
 	/// Execute the query and returns the results. Internally transfers data in binary format
 	///
