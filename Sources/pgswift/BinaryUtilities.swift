@@ -73,6 +73,13 @@ struct BinaryUtilities {
 			fmt.dateFormat = "HH:mm:ss.SSSS"
 			return fmt
 		}()
+		
+		/// a Timestamp formatter
+		static let timestampFormatter: ISO8601DateFormatter = {
+			var fmt = ISO8601DateFormatter()
+			fmt.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+			return fmt
+		}()
 	}
 	
 	/// converts a value to binary data
@@ -170,22 +177,24 @@ struct BinaryUtilities {
 			let (data, len) = stringToPointer(str)
 			return (data, len + 1)
 		case .timestamp, .timestamptz:
-			break
+			let str = DateTime.timestampFormatter.string(from: date)
+			let (data, len) = stringToPointer(str)
+			return (data, len + 1)
 		default:
 			throw PostgreSQLStatusErrors.unsupportedDataFormat
 		}
-		let interval = date.timeIntervalSince(BinaryUtilities.DateTime.referenceDate)
-		if asIntegers {
-			let micro = Int64(interval * 1_000_000)
-			var value = micro.bigEndian
-			let (bytes, len) = valueToBytes(&value)
-			return (UnsafePointer<Int8>(bytes), len)
-		} else { // as float
-			let seconds = Double(interval)
-			var value = seconds.bigEndian
-			let (bytes, len) = valueToBytes(&value)
-			return (UnsafePointer<Int8>(bytes), len)
-		}
+//		let interval = date.timeIntervalSince(BinaryUtilities.DateTime.referenceDate)
+//		if asIntegers {
+//			let micro = Int64(interval * 1_000_000)
+//			var value = micro.bigEndian
+//			let (bytes, len) = valueToBytes(&value)
+//			return (UnsafePointer<Int8>(bytes), len)
+//		} else { // as float
+//			let seconds = Double(interval)
+//			var value = seconds.bigEndian
+//			let (bytes, len) = valueToBytes(&value)
+//			return (UnsafePointer<Int8>(bytes), len)
+//		}
 	}
 	
 	/// converts a string to a pointer

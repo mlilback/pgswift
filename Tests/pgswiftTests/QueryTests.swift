@@ -87,10 +87,12 @@ final class QueryTests: BaseTest {
 	func testParamQuery() {
 		guard let con = connection else { XCTFail(); return }
 		XCTAssert(con.isConnected)
-		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval, smint, atime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)"
+		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval, smint, atime, signupStamp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)"
 		do {
 			let signDate = dateFormatter!.date(from: "11-21-2018")!
 			let signTime = BinaryUtilities.DateTime.timeFormatter.date(from: "14:34:21.2340")!
+			let signStamp = BinaryUtilities.DateTime.timestampFormatter.date(from: "2011-09-22T07:37:21.456+00:00")!
+			
 			let params: [QueryParameter?] = [
 				try QueryParameter(type: .int8, value: 50, connection: con),
 				try QueryParameter(type: .varchar, value: "Julia", connection: con),
@@ -102,6 +104,7 @@ final class QueryTests: BaseTest {
 				try QueryParameter(type: .double, value: Double(0.032), datesAsIntegers: con.hasIntegerDatetimes),
 				try QueryParameter(type: .int2, value: 33, connection: con),
 				try QueryParameter(type: .time, value: signTime, connection: con),
+				try QueryParameter(type: .timestamp, value: signStamp, connection: con),
 			]
 			let result = try con.execute(query: query, parameters: params)
 			if !result.wasSuccessful {
