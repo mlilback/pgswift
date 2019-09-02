@@ -127,7 +127,7 @@ public enum NativeType: String, CaseIterable {
 		switch self {
 		case .int: return Int.self
 		case .bool: return Bool.self
-		case .float: return Float.self
+		case .float: return Double.self
 		case .double: return Double.self
 		case .string: return String.self
 		case .data: return Data.self
