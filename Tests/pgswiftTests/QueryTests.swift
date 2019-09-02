@@ -82,22 +82,24 @@ final class QueryTests: BaseTest {
 			XCTFail("unknown error")
 		}
 	}
-	
+
+	// test smallint, integer
 	func testParamQuery() {
 		guard let con = connection else { XCTFail(); return }
 		XCTAssert(con.isConnected)
-		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval) VALUES ($1, $2, $3, $4, $5, $6, $7)"
+		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval, smint) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)"
 		do {
 			let signDate = dateFormatter!.date(from: "11-21-2018")!
 			let params: [QueryParameter?] = [
 				try QueryParameter(type: .int8, value: 50, connection: con),
 				try QueryParameter(type: .varchar, value: "Julia", connection: con),
-				try QueryParameter(type: .int8, value: 24, connection: con),
+				try QueryParameter(type: .int4, value: 24, connection: con),
 				try QueryParameter(type: .bool, value: true, connection: con),
 				try QueryParameter(type: .float, value: Float(1.2), connection: con),
 				// test coverage for internal initializer
 				try QueryParameter(type: .date, value: signDate, connection: con),
 				try QueryParameter(type: .double, value: Double(0.032), datesAsIntegers: con.hasIntegerDatetimes),
+				try QueryParameter(type: .int2, value: 33, connection: con),
 			]
 			let result = try con.execute(query: query, parameters: params)
 			if !result.wasSuccessful {
@@ -159,8 +161,9 @@ final class QueryTests: BaseTest {
 		signupStamp timestamp with time zone default now(),
 		member boolean default false,
 		fval float,
-		dval double precision);
-		INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454);
+		dval double precision,
+		smint smallint);
+		INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval, smint) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454, 3);
 		INSERT INTO person (id, name, age, signupDate) VALUES (2, 'kenny', 44, '2019-03-11');
 		INSERT INTO person (id, name) VALUES (3, 'brinley');
 		""" }
