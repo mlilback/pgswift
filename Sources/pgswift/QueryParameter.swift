@@ -39,12 +39,13 @@ public final class QueryParameter {
 	///   - value: the value to bind. Must be the matching NativeType
 	///   - connection: connection this parameter belongs to
 	/// - Throws: If value is not the appropriate type for valueType
-	public init(type valueType: PGType, value: Any, connection: Connection) throws {
-		self.valueType = valueType
-		let dataType = valueType.nativeType.metaType()
-		guard type(of: value) == dataType
-			else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
-		(bytes, valueCount) = try BinaryUtilities.bytes(forValue: value, asType: valueType, datesAsIntegers: connection.hasIntegerDatetimes)
+	public convenience init(type valueType: PGType, value: Any, connection: Connection) throws {
+		try self.init(type: valueType, value: value, datesAsIntegers: connection.hasIntegerDatetimes)
+//		self.valueType = valueType
+//		let dataType = valueType.nativeType.metaType()
+//		guard type(of: value) == dataType
+//			else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
+//		(bytes, valueCount) = try BinaryUtilities.bytes(forValue: value, asType: valueType, datesAsIntegers: connection.hasIntegerDatetimes)
 	}
 
 	/// intenral constructor that passes the single dateAsInteger value instead of the whole connection
