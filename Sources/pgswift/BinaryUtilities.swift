@@ -94,7 +94,7 @@ struct BinaryUtilities {
 				let bufferPtr = rawBuffer.bindMemory(to: Int8.self)
 				data.initialize(from: bufferPtr.baseAddress!, count: str.count)
 			}
-			return (UnsafePointer<Int8>(str), str.count) // is this null terminated?
+			return (UnsafePointer<Int8>(data), str.count)
 		case is Data:
 			// what a pain in the ass to what used to just be a call to .bytes()
 			let data = value as! Data
