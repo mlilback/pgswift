@@ -10,12 +10,6 @@ import Foundation
 public final class QueryParameter {
 	/// the type this parameter was requested to be
 	public let valueType: PGType
-	/// the type that postgresql should be told this is
-	public var effectiveType: PGType {
-		let stringTypes:  [PGType] = [.date, .timetz, .time, .timestamptz, .timestamp]
-		if stringTypes.contains(valueType) { return .varchar }
-		return valueType
-	}
 	var columnFormat: PGResult.ColumnFormat {
 		let stringTypes:  [PGType] = [.date, .timetz, .time, .timestamptz, .timestamp]
 		if stringTypes.contains(valueType) { return .string }
