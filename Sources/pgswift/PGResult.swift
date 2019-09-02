@@ -211,16 +211,11 @@ public class PGResult {
 			let days = Int32(bigEndian: rawValue.withMemoryRebound(to: Int32.self, capacity: 1) { $0.pointee })
 			let timeInterval = TimeInterval(days * BinaryUtilities.DateTime.secondsInDay)
 			return Date(timeInterval: timeInterval, since: BinaryUtilities.DateTime.referenceDate)
-		} else if columnTypes[column] == .time {
-			let microseconds = Int64(bigEndian: rawValue.withMemoryRebound(to: Int64.self, capacity: 1) { ptr in
-				return ptr.pointee
-			})
-			let interval = TimeInterval(microseconds) / 1_000_000
-			return Date(timeInterval: interval, since: BinaryUtilities.DateTime.referenceDate)
 		}
-		// otherwise, it is formatted like a timestamp
-		let seconds = BinaryUtilities.parseDouble(value: rawValue)
-		let interval = TimeInterval(seconds)
+		let microseconds = Int64(bigEndian: rawValue.withMemoryRebound(to: Int64.self, capacity: 1) { (ptr) in
+			return ptr.pointee
+ 		})
+		let interval = TimeInterval(microseconds) / 1_000_000
 		return Date(timeInterval: interval, since: BinaryUtilities.DateTime.referenceDate)
 	}
 	
