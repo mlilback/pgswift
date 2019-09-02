@@ -34,6 +34,9 @@ final class QueryTests: BaseTest {
 			
 			// select all persons
 			let result = try con.execute(query: "select id, name, age, signupDate, signupStamp, member, fval, dval from person")
+			if !result.wasSuccessful {
+				XCTFail("query failed: \(result.errorMessage)")
+			}
 			XCTAssertEqual(result.rowCount, 3)
 			XCTAssertEqual(try result.getStringValue(row: 0, column: 1), "mark")
 			XCTAssertEqual(try result.getIntValue(row: 1, column: 2), 44)
@@ -48,8 +51,7 @@ final class QueryTests: BaseTest {
 //			print("signup = \(String(describing: signup))")
 			XCTAssertEqual(con.lastErrorMessage, "")
 		} catch let err as PostgreSQLError {
-			print(err.localizedDescription)
-			XCTFail()
+			XCTFail("query failed: \(err)")
 		} catch {
 			XCTFail("unknown error")
 		}
@@ -59,11 +61,11 @@ final class QueryTests: BaseTest {
 		guard let con = connection else { XCTFail(); return }
 		XCTAssert(con.isConnected)
 		do {
-			let result = try con.executeBinary(query: "select id, name, age, signupDate, signupStamp from person")
+			let result = try con.executeBinary(query: "select * from person")
 			XCTAssertEqual(result.rowCount, 3)
-			XCTAssertEqual(try result.getStringValue(row: 0, column: 1), "mark")
-			XCTAssertEqual(try result.getIntValue(row: 1, column: 2), 44)
-			XCTAssertNil(try result.getIntValue(row: 2, column: 2))
+			XCTAssertEqual(try result.getValue(row: 0, columnName: "name"), "mark")
+			XCTAssertEqual(try result.getValue(row: 1, columnName: "age"), 44)
+			XCTAssertNil(try result.getValue(row: 2, columnName: "age"))
 			let str: String? = try result.getValue(row: 1, columnName: "name")
 			XCTAssertNotNil(str)
 			XCTAssertEqual(str!, "kenny")
@@ -71,15 +73,13 @@ final class QueryTests: BaseTest {
 			XCTAssertNotNil(sdate)
 			let onlyDate = sdate!.addingTimeInterval(12.0 * 60.0 * 60.0)
 			XCTAssertEqual(dateFormatter!.string(from: onlyDate), "1/8/2019")
-			// not sure how to test timestamp compared to string. dateFormatter with proper format string keep returning nil
-//			let signup = try result.getDateValue(row: 0, column: 4)!
-//			let signupStr = timestampFormatter.string(from: signup)
-//			XCTAssertEqual(signupStr, "2019-08-30 03:13:15.607487+00")
-//			print("signup = \(signupStr)")
+			let expectedBlob = "0a323621".data(using: .hexadecimal)!
+			let rdata: Data = try result.getValue(row: 0, columnName: "thumb")!
+			XCTAssertEqual(rdata, expectedBlob)
 		} catch let err as PostgreSQLError {
 			XCTFail(err.localizedDescription)
 		} catch {
-			XCTFail("unknown error")
+			XCTFail("unknown error: \(error)")
 		}
 	}
 
@@ -171,7 +171,7 @@ final class QueryTests: BaseTest {
 		smint smallint,
 		atime time,
 		thumb bytea);
-		INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval, smint, atime) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454, 3, '11:31:21.054');
+		INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval, smint, atime, thumb) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454, 3, '11:31:21.054', '\\x0a323621');
 		INSERT INTO person (id, name, age, signupDate) VALUES (2, 'kenny', 44, '2019-03-11');
 		INSERT INTO person (id, name) VALUES (3, 'brinley');
 		""" }
