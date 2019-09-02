@@ -12,15 +12,16 @@ public final class QueryParameter {
 	public let valueType: PGType
 	/// the type that postgresql should be told this is
 	public var effectiveType: PGType {
-		switch valueType {
-		case .date: return .varchar
-		default: return valueType
-		}
+		let stringTypes:  [PGType] = [.date, .timetz, .time]
+		if stringTypes.contains(valueType) { return .varchar }
+		return valueType
 	}
 	var columnFormat: PGResult.ColumnFormat {
-		if valueType == .date { return .string }
+		let stringTypes:  [PGType] = [.date, .timetz, .time]
+		if stringTypes.contains(valueType) { return .string }
 		return .binary
 	}
+
 	private let bytes: UnsafePointer<Int8>
 	public let valueCount: Int
 	

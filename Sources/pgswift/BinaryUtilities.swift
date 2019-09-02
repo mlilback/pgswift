@@ -51,19 +51,28 @@ extension String {
 
 /// static methods for working with binary data
 struct BinaryUtilities {
-	/// a DateFormatter using 'YYYY-MM-DD' as its format
-	static let dateFormatter: ISO8601DateFormatter = {
-		var fmt = ISO8601DateFormatter()
-		fmt.formatOptions = [.withFullDate, .withDashSeparatorInDate]
-		return fmt
-	}()
-	
+
 	/// static properties related to dates and times working with PostgreSQL
 	enum DateTime {
 		static let secondsInDay: Int32 = 24 * 60 * 60
 		// Reference date in Postgres is 2000-01-01, while in Swift it is 2001-01-01. There were 366 days in the year 2000.
 		static let timeIntervalBetween1970AndPostgresReferenceDate = Date.timeIntervalBetween1970AndReferenceDate - TimeInterval(366 * 24 * 60 * 60)
 		static let referenceDate = Date(timeIntervalSince1970: timeIntervalBetween1970AndPostgresReferenceDate)
+
+		/// a DateFormatter using 'YYYY-MM-DD' as its format
+		static let dateFormatter: ISO8601DateFormatter = {
+			var fmt = ISO8601DateFormatter()
+			fmt.formatOptions = [.withFullDate, .withDashSeparatorInDate]
+			return fmt
+		}()
+
+		/// a DateFormatter using 'HH:MM:SS.SSS' as its format
+		static let timeFormatter: DateFormatter = {
+			var fmt = DateFormatter()
+			fmt.locale = Locale(identifier: "en_US_POSIX")
+			fmt.dateFormat = "HH:mm:ss.SSSS"
+			return fmt
+		}()
 	}
 	
 	/// converts a value to binary data
@@ -135,7 +144,7 @@ struct BinaryUtilities {
 			let realBytes = UnsafeMutableRawPointer(bytes).bindMemory(to: Int8.self, capacity: data.count)
 			return (UnsafePointer(realBytes), data.count)
 		case is Date:
-			return dateToPointer(date: value as! Date, type: asType, asIntegers: datesAsIntegers)
+			return try dateToPointer(date: value as! Date, type: asType, asIntegers: datesAsIntegers)
 		default:
 			throw PostgreSQLStatusErrors.unsupportedDataFormat
 		}
@@ -149,12 +158,21 @@ struct BinaryUtilities {
 	///   - type: the type of the column this type will be inserted into
 	///   - asIntegers: true if dates are stored as integers
 	/// - Returns: the pointer and its length
-	static func dateToPointer(date: Date, type: PGType, asIntegers: Bool) -> (UnsafePointer<Int8>, Int) {
-		if type == .date {
+	static func dateToPointer(date: Date, type: PGType, asIntegers: Bool) throws -> (UnsafePointer<Int8>, Int) {
+		switch type {
+		case .date:
 			// use strings for date values
-			let str = dateFormatter.string(from: date)
+			let str = DateTime.dateFormatter.string(from: date)
 			let (data, len) = stringToPointer(str)
 			return (data, len + 1) // add null terminator
+		case .timetz, .time:
+			let str = DateTime.timeFormatter.string(from: date)
+			let (data, len) = stringToPointer(str)
+			return (data, len + 1)
+		case .timestamp, .timestamptz:
+			break
+		default:
+			throw PostgreSQLStatusErrors.unsupportedDataFormat
 		}
 		let interval = date.timeIntervalSince(BinaryUtilities.DateTime.referenceDate)
 		if asIntegers {

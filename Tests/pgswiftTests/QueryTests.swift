@@ -87,9 +87,10 @@ final class QueryTests: BaseTest {
 	func testParamQuery() {
 		guard let con = connection else { XCTFail(); return }
 		XCTAssert(con.isConnected)
-		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval, smint) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)"
+		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval, smint, atime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)"
 		do {
 			let signDate = dateFormatter!.date(from: "11-21-2018")!
+			let signTime = BinaryUtilities.DateTime.timeFormatter.date(from: "14:34:21.2340")!
 			let params: [QueryParameter?] = [
 				try QueryParameter(type: .int8, value: 50, connection: con),
 				try QueryParameter(type: .varchar, value: "Julia", connection: con),
@@ -100,6 +101,7 @@ final class QueryTests: BaseTest {
 				try QueryParameter(type: .date, value: signDate, connection: con),
 				try QueryParameter(type: .double, value: Double(0.032), datesAsIntegers: con.hasIntegerDatetimes),
 				try QueryParameter(type: .int2, value: 33, connection: con),
+				try QueryParameter(type: .time, value: signTime, connection: con),
 			]
 			let result = try con.execute(query: query, parameters: params)
 			if !result.wasSuccessful {
@@ -162,8 +164,9 @@ final class QueryTests: BaseTest {
 		member boolean default false,
 		fval float,
 		dval double precision,
-		smint smallint);
-		INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval, smint) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454, 3);
+		smint smallint,
+		atime time);
+		INSERT INTO person (id, name, age, signupDate, signupStamp, member, fval, dval, smint, atime) VALUES (1, 'mark', 46, '2019-01-08', '2019-08-30 03:13:15.607487+00', true, 2.34, 0.000454, 3, '11:31:21.054');
 		INSERT INTO person (id, name, age, signupDate) VALUES (2, 'kenny', 44, '2019-03-11');
 		INSERT INTO person (id, name) VALUES (3, 'brinley');
 		""" }
