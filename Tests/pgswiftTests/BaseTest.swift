@@ -19,7 +19,7 @@ class BaseTest: XCTestCase {
 		dateFormatter = DateFormatter()
 		dateFormatter?.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter?.setLocalizedDateFormatFromTemplate("M/d/yyyy")
-		timestampFormatter.dateFormat = " yyyy-MM-dd HH:m:s.SSSSx"
+		timestampFormatter.dateFormat = "yyyy-MM-dd HH:m:s.SSSSx"
 		timestampFormatter.locale = Locale(identifier: "en_US_POSIX")
 		timestampFormatter.timeZone = TimeZone(secondsFromGMT: 0)
 		
