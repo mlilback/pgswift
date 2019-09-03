@@ -14,8 +14,14 @@ class BaseTest: XCTestCase {
 	var dateFormatter: DateFormatter?
 	var timestampFormatter = DateFormatter()
 	
+	let testHost = "localhost"
+	let testPort = "5433"
+	let testUser = "test"
+	let testPassword = "secret"
+	let testDb = "test"
+	
 	override func setUp() {
-		let basicInfo = ConnectInfo(host: "localhost", port: "5433", user: "test", password: "secret", dbname: "test", sslMode: .allow)
+		let basicInfo = ConnectInfo(host: testHost, port: testPort, user: testUser, password: testPassword, dbname: testDb, sslMode: .allow)
 		dateFormatter = DateFormatter()
 		dateFormatter?.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter?.setLocalizedDateFormatFromTemplate("M/d/yyyy")

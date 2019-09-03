@@ -23,6 +23,20 @@ extension Date {
 
 final class QueryTests: BaseTest {
 	
+	func testConnectionConvienceInit() {
+		do {
+			let basicInfo = ConnectInfo(host: testHost, port: testPort, user: testUser, password: testPassword, dbname: testDb, sslMode: .allow)
+
+			let con2 = Connection(connectInfo: basicInfo)
+			try con2.open()
+			XCTAssert(con2.isConnected)
+
+			con2.close()
+		} catch {
+			XCTFail("failed with \(error)")
+		}
+	}
+	
 	func testBasicQuery() {
 		guard let con = connection else { XCTFail(); return }
 		XCTAssert(con.isConnected)
