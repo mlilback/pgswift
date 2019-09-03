@@ -8,6 +8,8 @@
 import Foundation
 import CLibpq
 
+
+@available(OSX 10.13, *)
 public class PGResult {
 	// MARK: - properties
 	

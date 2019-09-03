@@ -32,6 +32,7 @@ enum InternalError: Error {
 // Copied from vapor 2's postgresql project
 
 /// Encapsulates an error from PostgreSQL.
+@available(OSX 10.13, *)
 public struct PostgreSQLError: Error {
 	/// the internal PostgreSQL error code
 	public let code: Code
@@ -41,6 +42,7 @@ public struct PostgreSQLError: Error {
 	var localizedDescription: String { return "error: \(code), reason: \(reason)" }
 }
 
+@available(OSX 10.13, *)
 extension PostgreSQLError {
 	public enum Code: String {
 		// Class 01 — Warning
@@ -328,6 +330,7 @@ extension PostgreSQLError {
 
 // MARK: Inits
 
+@available(OSX 10.13, *)
 extension PostgreSQLError {
 	public init(code: Code, errorMessage: String) {
 		self.init(code: code, reason: errorMessage)

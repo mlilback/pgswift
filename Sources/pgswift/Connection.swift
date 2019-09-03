@@ -8,6 +8,7 @@
 import Foundation
 import CLibpq
 
+@available(OSX 10.13, *)
 public final class Connection {
 	// MARK: - properties
 	public typealias PGConnection = OpaquePointer?

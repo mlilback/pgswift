@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(OSX 10.13, *)
 public final class QueryParameter {
 	/// the type this parameter was requested to be
 	public let valueType: PGType
