@@ -59,7 +59,8 @@ public struct ConnectParam {
 
 /// Encapsulates a set of connection parameters
 public struct ConnectInfo {
-	private var params: [ConnectParam]
+	/// the parameters included in this structure
+	public private(set) var params: [ConnectParam]
 	
 	/// initalizes with an array of parameters
 	///

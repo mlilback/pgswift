@@ -14,31 +14,52 @@ public enum PGType: UInt32, CaseIterable {
 	/// unsupported data types have a native data type of string and return a string represenation of the value, or an empty string
 	case unsupported = 0
 	
+	/// uses native type of .bool
 	case bool = 16
 	
+	/// uses native type of .int
 	case int2 = 21
+	/// uses native type of .int
 	case int4 = 23
+	/// uses native type of .int
 	case int8 = 20
+	/// uses native type of .double
 	case float = 700
+	/// uses native type of .double
 	case double = 701
+	/// not yet supported, but planned
 	case numeric = 1700
 	
+	/// uses native type of .string
 	case char = 18
+	/// uses native type of .string
 	case name = 19
+	/// uses native type of .string
 	case text = 25
+	/// uses native type of .string
 	case bpchar = 1042
+	/// uses native type of .string
 	case varchar = 1043
+	/// uses native type of .string
 	case json = 114
+	/// uses native type of .string
 	case xml = 142
 	
+	/// uses native type of .date
 	case date = 1082
+	/// uses native type of .date
 	case time = 1083
+	/// uses native type of .date
 	case timetz = 1266
+	/// uses native type of .date
 	case timestamp = 1114
+	/// uses native type of .date
 	case timestamptz = 1184
 	
+	/// uses native type of .data
 	case bytea = 17
 	
+	/// the native type (int, string, date) used for this PGtype
 	public var nativeType: NativeType {
 		switch self {
 		case .unsupported:
@@ -96,12 +117,19 @@ public enum PGType: UInt32, CaseIterable {
 
 /// Swift types a database value can be returned as
 public enum NativeType: String, CaseIterable {
+	/// returned as *Int*
 	case int
+	/// returned as *Bool*
 	case bool
+	/// returned as *Double*
 	case float
+	/// returned as *Double*
 	case double
+	/// returned as *String*
 	case string
+	/// returned as *Date*
 	case date
+	/// returned as *Data*
 	case data
 	
 	/// Test if the native type's class is the same as the type parameter
@@ -120,7 +148,7 @@ public enum NativeType: String, CaseIterable {
 		}
 	}
 
-	/// returns the metatype for this native type. For instance, .string return String.self
+	/// returns the metatype for this native type. For instance, .string returns String.self
 	///
 	/// - Returns: the metatype for this NativeType (type.self)
 	public func metaType() -> Any.Type {

@@ -8,9 +8,12 @@
 import Foundation
 
 @available(OSX 10.13, *)
+/// Representation of a parameter to replace a placeholder in a query
 public final class QueryParameter {
 	/// the type this parameter was requested to be
 	public let valueType: PGType
+	
+	/// the format used to send this to the server. Either `.binary` or `.string`
 	var columnFormat: PGResult.ColumnFormat {
 		let stringTypes:  [PGType] = [.date, .timetz, .time, .timestamptz, .timestamp]
 		if stringTypes.contains(valueType) { return .string }
@@ -18,6 +21,7 @@ public final class QueryParameter {
 	}
 
 	private let bytes: UnsafePointer<Int8>
+	/// the number of bytes the value takes up
 	public let valueCount: Int
 	
 	/// The caller owns this value and is responsible for calling .deallocate() on it
@@ -38,7 +42,7 @@ public final class QueryParameter {
 		try self.init(type: valueType, value: value, datesAsIntegers: connection.hasIntegerDatetimes)
 	}
 
-	/// intenral constructor that passes the single dateAsInteger value instead of the whole connection
+	/// internal constructor that passes the single dateAsInteger value instead of the whole connection
 	internal init(type valueType: PGType, value: Any, datesAsIntegers: Bool) throws {
 		// FIXME: this doesn't seem like the right way to do this, but can't call our own methods. Maybe something in NativeType?
 		if valueType == .float, value is Float {

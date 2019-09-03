@@ -1,0 +1,8 @@
+module: pgswift
+author: Mark Lilback
+author_url: http://www.lilback.com/
+github_url: https://github.com/mlilback/pgswift
+copyright: '©2019 Mark Lilback uder [ISC](https://github.com/mlilback/pgswift/blob/master/LICENSE) license.'
+
+#swift_version: 5.0
+

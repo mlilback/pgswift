@@ -9,8 +9,11 @@ import Foundation
 import CLibpq
 
 @available(OSX 10.13, *)
+
+/// Represents a connection to a PostgreSQL server
 public final class Connection {
 	// MARK: - properties
+	
 	public typealias PGConnection = OpaquePointer?
 	
 	/// if dates are stored as integer. If false, stored as float.
@@ -87,6 +90,7 @@ public final class Connection {
 	
 	// MARK: - status
 	
+	/// the currently reported last error message from the server
 	public var lastErrorMessage: String {
 		return conQueue.sync {
 			guard let pgcon = pgConnection, let err = PQerrorMessage(pgcon) else { return "" }

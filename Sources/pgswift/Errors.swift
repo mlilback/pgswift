@@ -44,6 +44,7 @@ public struct PostgreSQLError: Error {
 
 @available(OSX 10.13, *)
 extension PostgreSQLError {
+	/// enum of native PostgreSQL error codes
 	public enum Code: String {
 		// Class 01 — Warning
 		case warning = "01000"

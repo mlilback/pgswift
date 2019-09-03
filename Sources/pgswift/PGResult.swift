@@ -1,5 +1,5 @@
 //
-//  Results.swift
+//  PGResult.swift
 //  pgswift
 //
 //  Created by Mark Lilback on 8/28/19.
@@ -8,28 +8,35 @@
 import Foundation
 import CLibpq
 
-
 @available(OSX 10.13, *)
+/// Encapsulates the server response from executing a query
 public class PGResult {
 	// MARK: - properties
 	
 	private let result: OpaquePointer
 	weak var connection: Connection?
-	public let status: Status
 	private let dateFormatter: ISO8601DateFormatter
 	private let timeFormatter: ISO8601DateFormatter
 	private let timestampFormatter: DateFormatter
-	
+	/// the status returned from the server
+	public let status: Status
+
 	/// true if the result was .commandkOk, .tuplesOk, or .signleTupe
 	public var wasSuccessful: Bool {
 		return status == .commandOk || status == .tuplesOk || status == .singleTuple
 	}
 
+	/// the server's description of the status
 	public var statusMessage: String { return String(cString: PQresStatus(status.pgStatus)) }
+	/// the error message associated with these results
 	public var errorMessage: String { return String(cString: PQresultErrorMessage(result)) }
+	/// the number of rows returned
 	public var rowCount: Int { return Int(PQntuples(result)) }
+	/// the number of columns returned
 	public var columnCount: Int { return Int(PQnfields(result)) }
+	/// true if the status indicates data was returned
 	public var returnedData: Bool { return status == .tuplesOk || status == .singleTuple }
+	/// for non-select queries (such as insert/update/deletee) the number of rows affected
 	public var rowsAffected: String { return String(utf8String: PQcmdTuples(result)) ?? "" }
 	/// if a single row was inserted, the Oid of that row. Returns -1 of there is no value
 	public var insertedOid: Int {
