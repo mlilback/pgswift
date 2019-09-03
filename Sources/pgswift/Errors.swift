@@ -17,6 +17,8 @@ public enum PostgreSQLStatusErrors: Error {
 	case invalidRowNumber
 	case invalidColumnNumber
 	case invalidColumnName
+	/// a query hardcoded in this library failed
+	case internalQueryFailed
 	/// query does not meet requirements of function call
 	case invalidQuery
 	/// when caller specifies a type and result is not that type

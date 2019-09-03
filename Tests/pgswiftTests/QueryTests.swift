@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import pgswift
 
-// need to test: "insert returning"
+// need to test: transactions
 
 extension Date {
 	var onlyDate: Date {

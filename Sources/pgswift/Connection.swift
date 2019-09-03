@@ -128,6 +128,33 @@ public final class Connection {
 		return sver
 	}
 	
+	// MARK: - transactions
+	
+	/// Wraps a closure in a transaction. If it returns false or an error is thrown,
+	/// performs a rollback. Otherwise, performs a commit.
+	///
+	/// - Parameter body: closure to execute. Passed the connection to use
+	/// - Throws: any errors executing the query
+	public func withTransaction(body: (Connection) throws -> Bool) throws {
+		let result = try execute(query: "begin", parameters: [])
+		guard result.wasSuccessful else { throw PostgreSQLStatusErrors.invalidQuery }
+		do {
+			let commit = try body(self)
+			guard commit else { throw PostgreSQLStatusErrors.internalQueryFailed }
+			let cresult = try execute(query: "commit", parameters: [])
+			guard cresult.wasSuccessful else {
+				assertionFailure("commit failed: \(cresult.errorMessage)")
+				throw PostgreSQLStatusErrors.internalQueryFailed
+			}
+		} catch {
+			let rollResponse = try execute(query: "rollback", parameters: [])
+			guard rollResponse.wasSuccessful else {
+				assertionFailure("rollabck failed: \(rollResponse.errorMessage)")
+				throw PostgreSQLStatusErrors.internalQueryFailed
+			}
+		}
+	}
+	
 	// MARK: - convience methods
 	
 	/// Allows use of this connection's PGConnection synchronously
