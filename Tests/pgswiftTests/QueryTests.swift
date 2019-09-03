@@ -84,6 +84,11 @@ final class QueryTests: BaseTest {
 			let timeStr = BinaryUtilities.DateTime.timeFormatter.string(from: onlyTime)
 			XCTAssertEqual(timeStr, "11:31:21.0540") // formatter returns 4 digits, so add 0 on end
 			
+			let stamp: Date = try result.getValue(row: 0, columnName: "signupStamp")!
+			let target = timestampFormatter.date(from: "2019-08-30 03:13:15.607487+00")
+			guard target != nil else { XCTFail("failed to convert timestamp string to date object"); return }
+			XCTAssertEqual(stamp.timeIntervalSinceReferenceDate, target!.timeIntervalSinceReferenceDate, accuracy: 0.001)
+			
 			let expectedBlob = "0a323621".data(using: .hexadecimal)!
 			let rdata: Data = try result.getValue(row: 0, columnName: "thumb")!
 			XCTAssertEqual(rdata, expectedBlob)
@@ -98,7 +103,7 @@ final class QueryTests: BaseTest {
 	func testParamQuery() {
 		guard let con = connection else { XCTFail(); return }
 		XCTAssert(con.isConnected)
-		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval, smint, atime, signupStamp, thumb) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)"
+		let query = "INSERT INTO person (id, name, age, member, fval, signupDate, dval, smint, atime, signupStamp, thumb) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id"
 		do {
 			let signDate = dateFormatter!.date(from: "11-21-2018")!
 			let signTime = BinaryUtilities.DateTime.timeFormatter.date(from: "14:34:21.2340")!
@@ -123,6 +128,11 @@ final class QueryTests: BaseTest {
 				XCTFail("insert failed with error: \(result.errorMessage)")
 			}
 			XCTAssertEqual(result.rowsAffected, "1")
+			
+			// test that RETURNING clause worked
+			let returnedId: Int? = try result.getValue(row: 0, column: 0)
+			XCTAssertNotNil(returnedId)
+			XCTAssertEqual(returnedId!, 50)
 			// TODO: select the row and make sure it was inserted properly
 		} catch let err as PostgreSQLError {
 			print(err.localizedDescription)
@@ -147,7 +157,6 @@ final class QueryTests: BaseTest {
 				expectation.fulfill()
 			}
 			source.resume()
-			sleep(1)
 			
 			let nresult = try con.execute(query: "select pg_notify('\(channelName)', '\(payload)');")
 			if !nresult.wasSuccessful {
