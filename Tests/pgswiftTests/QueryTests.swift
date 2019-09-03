@@ -141,7 +141,7 @@ final class QueryTests: BaseTest {
 			if !result.wasSuccessful {
 				XCTFail("insert failed with error: \(result.errorMessage)")
 			}
-			XCTAssertEqual(result.rowsAffected, "1")
+			XCTAssertEqual(result.rowsAffected, 1)
 			
 			// test that RETURNING clause worked
 			let returnedId: Int? = try result.getValue(row: 0, column: 0)

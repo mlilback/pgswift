@@ -37,7 +37,11 @@ public class PGResult {
 	/// true if the status indicates data was returned
 	public var returnedData: Bool { return status == .tuplesOk || status == .singleTuple }
 	/// for non-select queries (such as insert/update/deletee) the number of rows affected
-	public var rowsAffected: String { return String(utf8String: PQcmdTuples(result)) ?? "" }
+	public var rowsAffected: Int {
+		guard let str = String(utf8String: PQcmdTuples(result)) else { return 0 }
+		guard let ival = Int(str) else { return 0 }
+		return ival
+	}
 	/// if a single row was inserted, the Oid of that row. Returns -1 of there is no value
 	public var insertedOid: Int {
 		let val = PQoidValue(result)
