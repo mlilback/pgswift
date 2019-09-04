@@ -181,7 +181,7 @@ public final class Connection {
 	/// Allows use of this connection's PGConnection synchronously
 	///
 	/// - Parameter body: closure called with the PG connection
-	public func withPGConnection(body: (PGConnection) -> Void) {
+	internal func withPGConnection(body: (PGConnection) -> Void) {
 		guard isConnected, let pgcon = pgConnection else
 		{ precondition(isConnected, "database not connected"); return }
 		conQueue.sync {
@@ -255,7 +255,6 @@ public final class Connection {
 		}
 	}
 
-	@discardableResult
 	/// Execute a query with parameters
 	///
 	/// - Parameters:
@@ -263,6 +262,7 @@ public final class Connection {
 	///   - parameters: array of QueryParameters
 	/// - Returns: the results of the query
 	/// - Throws: if connection not open, don't get a valid response, query parameter mismatch
+	@discardableResult
 	public func execute(query: String, parameters: [QueryParameter?]) throws -> PGResult {
 		return try conQueue.sync {
 			guard isConnectedRaw, let pgcon = pgConnection else {
@@ -276,12 +276,12 @@ public final class Connection {
 		}
 	}
 	
-	@discardableResult
 	/// Execute the query and returns the results. Internally transfers data in binary format
 	///
 	/// - Parameter query: query to perform
 	/// - Returns: the results of that query
 	/// - Throws: if connection isn't open, or don't get a valid response
+	@discardableResult
 	public func executeBinary(query: String) throws -> PGResult {
 		return try conQueue.sync {
 			guard isConnectedRaw, let pgcon = pgConnection else {
