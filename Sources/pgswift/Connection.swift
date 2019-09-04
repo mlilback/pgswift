@@ -9,15 +9,13 @@ import Foundation
 import CLibpq
 import Logging
 
-@available(OSX 10.13, *)
-
 internal let logger = Logger(label: "com.lilback.pgswift")
 
 /// Represents a connection to a PostgreSQL server
 public final class Connection {
 	// MARK: - properties
 	
-	public typealias PGConnection = OpaquePointer?
+	internal typealias PGConnection = OpaquePointer?
 	
 	/// if dates are stored as integer. If false, stored as float.
 	private(set) var hasIntegerDatetimes: Bool = false

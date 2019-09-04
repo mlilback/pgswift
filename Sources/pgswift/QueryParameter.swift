@@ -7,7 +7,6 @@
 
 import Foundation
 
-@available(OSX 10.13, *)
 /// Representation of a parameter to replace a placeholder in a query
 public final class QueryParameter {
 	/// the type this parameter was requested to be

@@ -8,7 +8,6 @@
 import Foundation
 import CLibpq
 
-@available(OSX 10.13, *)
 /// Encapsulates the server response from executing a query
 public class PGResult {
 	// MARK: - properties

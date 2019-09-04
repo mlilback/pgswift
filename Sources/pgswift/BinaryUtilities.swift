@@ -50,7 +50,6 @@ extension String {
 }
 
 /// static methods for working with binary data
-@available(OSX 10.13, *)
 struct BinaryUtilities {
 
 	/// static properties related to dates and times working with PostgreSQL
