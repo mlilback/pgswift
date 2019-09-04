@@ -22,6 +22,17 @@ extension Date {
 }
 
 final class QueryTests: BaseTest {
+	struct Person: Equatable {
+		let id: Int
+		let name: String
+		let age: Int
+
+		init(from results: PGResult, row: Int = 0) throws {
+			id = try results.getValue(row: row, columnName: "id")!
+			name = try results.getValue(row: row, columnName: "name")!
+			age = try results.getValue(row: row, columnName: "age")!
+		}
+	}
 	
 	func testConnectionConvienceInit() {
 		do {
@@ -156,6 +167,75 @@ final class QueryTests: BaseTest {
 		}
 	}
 	
+	func testTranactionCommit() throws {
+		let countGeoffQuery = "select count(*) from person where name = 'geoff'"
+		let countGeorgeQuery = "select count(*) from person where name = 'george'"
+		// confirm no row named geoff
+		let origCount: Int = try connection!.getSingleRowValue(query: countGeoffQuery)!
+		XCTAssertEqual(origCount, 0)
+		/// open a sencond connection
+		let con2 = Connection(cloning: self.connection!)
+		try! con2.open()
+		defer { con2.close() }
+		XCTAssertTrue(con2.isConnected)
+		// confirm same orig count
+		let c2count: Int = try con2.getSingleRowValue(query: countGeoffQuery)!
+		XCTAssertEqual(c2count, origCount)
+		/// test queries in a transaction
+		let aPerson = try connection!.withTransaction { con -> Person in
+			let insResult = try con.execute(query: "insert into person (id, name, age) values (23, 'geoff', 43) returning *", parameters: [])
+			let geoff = try Person(from: insResult)
+			//make sure there is a geoff
+			var aCount: Int = try con.getSingleRowValue(query: countGeoffQuery)!
+			XCTAssertEqual(aCount, 1)
+			// confirm no geoff in con2
+			aCount = try con2.getSingleRowValue(query: countGeoffQuery)!
+			XCTAssertEqual(aCount, 0)
+			// update and confirm
+			let upReasult = try con.execute(query: "update person set name = 'george' where id = $1 returning *", parameters: [try QueryParameter(type: .int8, value: geoff.id, connection: con)])
+			let george = try Person(from: upReasult)
+			XCTAssertNotEqual(george, geoff)
+			XCTAssertEqual(george.name, "george")
+			// confirm no george outside transaction
+			aCount = try con2.getSingleRowValue(query: countGeorgeQuery)!
+			XCTAssertEqual(aCount, 0)
+			return george
+		}
+		XCTAssertNotNil(aPerson)
+		// confirm transaction committed
+		let georgeCount: Int = try con2.getSingleRowValue(query:  countGeorgeQuery)!
+		XCTAssertEqual(georgeCount, 1)
+	}
+
+	func testTranactionRollback() throws {
+		let countGeoffQuery = "select count(*) from person where name = 'geoff'"
+		// confirm no row named geoff
+		let origCount: Int = try connection!.getSingleRowValue(query: countGeoffQuery)!
+		XCTAssertEqual(origCount, 0)
+		do {
+		/// test queries in a transaction so {
+			let aPerson = try connection!.withTransaction { con -> Person? in
+				let insResult = try con.execute(query: "insert into person (id, name, age) values (23, 'geoff', 43) returning *", parameters: [])
+				let geoff = try Person(from: insResult)
+				//make sure there is a geoff
+				let aCount: Int = try con.getSingleRowValue(query: countGeoffQuery)!
+				XCTAssertEqual(aCount, 1)
+				// run a query that should fail
+				let gid: Int? = try connection!.getSingleRowValue(query: "select doofus from oerson")
+				XCTFail("junk query should have raised exception")
+				XCTAssertNil(gid)
+				return geoff
+			}
+			XCTAssertNil(aPerson)
+			XCTFail("should have raised error")
+		} catch {
+			XCTAssertTrue(true, "transaction should have been rolled back")
+		}
+		// confirm transaction failed
+		let finalCount: Int = try connection!.getSingleRowValue(query:  countGeoffQuery)!
+		XCTAssertEqual(finalCount, 0)
+	}
+
 	func testNotifications() {
 		let channelName = "foobar"
 		let payload = "barfoo"
@@ -217,5 +297,7 @@ final class QueryTests: BaseTest {
 		("testBasicQuery", testBasicQuery),
 		("testBinaryQuery", testBinaryQuery),
 		("testNotifications", testNotifications),
+		("testTranactionCommit", testTranactionCommit),
+		("testTranactionRollback", testTranactionRollback),
 	]
 }
