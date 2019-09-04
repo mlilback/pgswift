@@ -7,8 +7,11 @@
 
 import Foundation
 import CLibpq
+import Logging
 
 @available(OSX 10.13, *)
+
+internal let logger = Logger(label: "com.lilback.pgswift")
 
 /// Represents a connection to a PostgreSQL server
 public final class Connection {
@@ -76,6 +79,16 @@ public final class Connection {
 			}
 			precondition(pgConnection != nil, "PQconnect returned nil, which means failed to alloc memory which should be  impossible")
 			hasIntegerDatetimes = getBooleanParameter(key: "integer_datetimes", defaultValue: true)
+			// surpress notifications and warnings from the server. we handle our own way
+			do {
+				let results = try executeRaw(query: "set client_min_messages = error")
+				guard results.wasSuccessful else {
+					logger.error("failed to set client_min_messages: \(results.errorMessage)")
+					throw PostgreSQLStatusErrors.internalQueryFailed
+				}
+			} catch {
+				logger.error("error suppressing pg messages: \(error)")
+			}
 		}
 	}
 	
