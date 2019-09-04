@@ -193,13 +193,14 @@ final class QueryTests: BaseTest {
 	}
 
 	override var initialSQL: String { return """
+		DROP TABLE IF EXISTS person CASCADE;
 		CREATE TABLE person (
-		id integer not null primary key,
-		name varchar(20) not null,
+		id integer NOT NULL PRIMARY KEY,
+		name varchar(20) NOT NULL,
 		age int,
 		signupDate date DEFAULT NOW(),
-		signupStamp timestamp with time zone default now(),
-		member boolean default false,
+		signupStamp timestamp with time zone DEFAULT now(),
+		member boolean DEFAULT false,
 		fval float,
 		dval double precision,
 		smint smallint,
@@ -210,7 +211,7 @@ final class QueryTests: BaseTest {
 		INSERT INTO person (id, name) VALUES (3, 'brinley');
 		""" }
 	
-	override var cleanupSQL: String? { return "drop table person" }
+	override var cleanupSQL: String? { return "DROP TABLE person CASCADE" }
 
 	static var allTests = [
 		("testBasicQuery", testBasicQuery),

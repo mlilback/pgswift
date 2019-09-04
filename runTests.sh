@@ -10,7 +10,7 @@ function finish {
 
 docker run --name pgtest -e POSTGRES_PASSWORD="pgtest" -p 5433:5432 --rm -d postgres:9
 echo "waiting for db to start"
-sleep 10;
+sleep 5;
 docker logs pgtest
 docker exec pgtest psql -U postgres -c "create database test;"
 docker exec pgtest psql -U postgres -c "create user test superuser password 'secret';"
@@ -21,7 +21,7 @@ echo "server ready"
 
 #while true
 #do
-#	sleep 10
+#	sleep 5
 #done
 
 #swift test
