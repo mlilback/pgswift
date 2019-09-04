@@ -68,6 +68,13 @@ public final class Connection {
 		close()
 	}
 	
+	/// Creates a connection using the same parameters as the specified connection
+	///
+	/// - Parameter cloning: The connection to clone
+	public convenience init(cloning: Connection) {
+		self.init(connectInfo: cloning.connectInfo)
+	}
+	
 	// MARK: - open/close
 	
 	/// opens the connection to the database server
@@ -154,7 +161,6 @@ public final class Connection {
 		let result = try execute(query: "begin", parameters: [])
 		guard result.wasSuccessful else { throw PostgreSQLStatusErrors.invalidQuery }
 		do {
-			/// FIXME: need to catch caller errors and return that as the type of error
 			returnObject = try body(self)
 			let cresult = try execute(query: "commit", parameters: [])
 			guard cresult.wasSuccessful else {
@@ -167,6 +173,7 @@ public final class Connection {
 				assertionFailure("rollabck failed: \(rollResponse.errorMessage)")
 				throw PostgreSQLStatusErrors.internalQueryFailed
 			}
+			throw error
 		}
 		return returnObject
 	}
