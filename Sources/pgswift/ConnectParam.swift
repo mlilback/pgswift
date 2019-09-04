@@ -11,24 +11,39 @@ import Foundation
 public struct ConnectParam {
 	/// supported names for connection parameters. Defined at [PostgreSQL docs](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
 	public enum Name: String, CaseIterable {
+		/// host running the database server
 		case host
+		/// port on host to connect to. Defaults to 5432
 		case port
+		/// the name of the database to use
 		case dbname
+		/// name to login with
 		case user
+		/// password to login with
 		case password
+		/// how long (in seconds) to wait before giving up on opening a connection
 		case connectTimeout = "connect_timeout"
+		/// psuedo command line parameters
 		case options
+		/// the name of the application connecting. Shown in admin functions.
 		case appName = "application_name"
+		/// which SSLMode to use
 		case sslMode = "sslmode"
 	}
 
 	/// possible modes for sslMode parameter. Defined at [PostgreSQL docs](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS).
 	public enum SSLMode: String, CaseIterable {
+		/// onlyy try a non-SSL connection
 		case disable
+		/// first try a non-SSL connection, if that fails, try a SSL connection
 		case allow
+		/// first try an SSL connection, if that fails, try a non-SSQL connection
 		case prefer
+		/// only try an SSL connection. If a root CA file is present, verify the certificate in the same way as if verify-ca was specified. This is the default value
 		case require
+		/// only try an SSL connection, and verify that the server certificate is issued by a trusted certificate authority (CA)
 		case verifyCA = "verify-ca"
+		/// only try an SSL connection, verify that the server certificate is issued by a trusted CA and that the requested server host name matches that in the certificate
 		case verifyFull = "verify-full"
 	}
 	

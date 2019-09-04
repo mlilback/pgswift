@@ -10,12 +10,19 @@ import CLibpq
 
 /// Programming errors
 public enum PostgreSQLStatusErrors: Error {
+	/// called open() when the connection was already opened
 	case alreadyOpen
+	/// the server sent back an irregular response
 	case badResponse
+	/// thrown when getting a single value and no rows were returned
 	case emptyQuery
+	/// thrown when a requested value type does not match what is supported by the PGType
 	case unsupportedDataFormat
+	/// thrown when PGResult is asked to get a value for invalid row number
 	case invalidRowNumber
+	/// thrown when PGResult is asked to get a value for invalid column number
 	case invalidColumnNumber
+	/// thrown when PGResult is asked to get a value for an invalid column name
 	case invalidColumnName
 	/// a query hardcoded in this library failed
 	case internalQueryFailed
