@@ -25,6 +25,8 @@ public enum PostgreSQLStatusErrors: Error {
 	case invalidType
 	/// when setting parameters for a query, float columns must be specified as doubles
 	case floatsMustbeDoubles
+	///  when user code in a closure fails
+	case callerError
 }
 
 enum InternalError: Error {

@@ -130,17 +130,19 @@ public final class Connection {
 	
 	// MARK: - transactions
 	
-	/// Wraps a closure in a transaction. If it returns false or an error is thrown,
+	/// Wraps a closure in a transaction. If an error is thrown,
 	/// performs a rollback. Otherwise, performs a commit.
 	///
 	/// - Parameter body: closure to execute. Passed the connection to use
+	/// - Returns: the value returned from the body closure
 	/// - Throws: any errors executing the query
-	public func withTransaction(body: (Connection) throws -> Bool) throws {
+	public func withTransaction<T>(body: (Connection) throws -> T?) throws -> T? {
+		var returnObject: T? = nil
 		let result = try execute(query: "begin", parameters: [])
 		guard result.wasSuccessful else { throw PostgreSQLStatusErrors.invalidQuery }
 		do {
-			let commit = try body(self)
-			guard commit else { throw PostgreSQLStatusErrors.internalQueryFailed }
+			/// FIXME: need to catch caller errors and return that as the type of error
+			returnObject = try body(self)
 			let cresult = try execute(query: "commit", parameters: [])
 			guard cresult.wasSuccessful else {
 				assertionFailure("commit failed: \(cresult.errorMessage)")
@@ -153,6 +155,7 @@ public final class Connection {
 				throw PostgreSQLStatusErrors.internalQueryFailed
 			}
 		}
+		return returnObject
 	}
 	
 	// MARK: - convience methods
