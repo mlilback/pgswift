@@ -22,5 +22,5 @@ CircleCI doesn't support macOS. Travis doesn't support using docker containers o
 
 ## Documentation
 
-[API documentation](https://github.com/mlilback/pgswift/docs/) is enerated using [jazzy](https://github.com/realm/jazzy). It uses Ruby, so I'd highly recommend using [rbenv](https://github.com/rbenv/rbenv) instead of the system Ruby since the syystem Ruby is old and deprectated in Catalina.  And you'd have to use sudo to install it in system directories.
+[API documentation](https://mlilback.github.io/pgswift) is enerated using [jazzy](https://github.com/realm/jazzy). It uses Ruby, so I'd highly recommend using [rbenv](https://github.com/rbenv/rbenv) instead of the system Ruby since the syystem Ruby is old and deprectated in Catalina.  And you'd have to use sudo to install it in system directories.
 
