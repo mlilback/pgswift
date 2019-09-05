@@ -93,6 +93,7 @@ public final class Connection {
 				}
 			} catch {
 				logger.error("error suppressing pg messages: \(error)")
+				throw error
 			}
 		}
 	}
