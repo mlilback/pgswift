@@ -13,7 +13,7 @@ public struct ConnectParam {
 	public enum Name: String, CaseIterable {
 		/// host running the database server
 		case host
-		/// port on host to connect to. Defaults to 5432
+		/// port on host to connect to. Defaults to 5432. Passed as String becuase that's what the native PostgreSQL client uses
 		case port
 		/// the name of the database to use
 		case dbname
