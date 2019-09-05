@@ -359,7 +359,7 @@ extension PostgreSQLError {
 	}
 	
 	/// internal version that for when the connection is already locked
-	internal init(code: Code, pgConnection: OpaquePointer) {
+	internal init(code: Code, pgConnection: Connection.PGConnection) {
 		var reason = "unknown"
 		if let error = PQerrorMessage(pgConnection),
 			let pgreason = String(validatingUTF8: error)

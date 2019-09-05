@@ -111,9 +111,13 @@ public final class Connection {
 	/// the currently reported last error message from the server
 	public var lastErrorMessage: String {
 		return conQueue.sync {
-			guard let pgcon = pgConnection, let err = PQerrorMessage(pgcon) else { return "" }
-			return String(validatingUTF8: err) ?? ""
+			return lastErrorMessageRaw()
 		}
+	}
+	
+	internal func lastErrorMessageRaw() -> String {
+		guard let pgcon = pgConnection, let err = PQerrorMessage(pgcon) else { return "" }
+		return String(validatingUTF8: err) ?? ""
 	}
 	
 	/// true if the connection is currently open
@@ -232,7 +236,7 @@ public final class Connection {
 	@discardableResult
 	private func executeRaw(query: String) throws -> PGResult {
 		guard isConnectedRaw, let pgcon = pgConnection else
-			{ throw PostgreSQLError(code: .connectionDoesNotExist , connection: self) }
+			{ throw PostgreSQLError(code: .connectionDoesNotExist, pgConnection: pgConnection!) }
 		let rawResult: OpaquePointer? = PQexec(pgcon, query)
 		guard let result = rawResult else { throw PostgreSQLStatusErrors.badResponse }
 		return PGResult(result: result, connection: self)
