@@ -14,6 +14,8 @@ The one feature that sets it apart from the other libraries (to me) is support f
 
 XCTest is used, but they are integration/system tests, not unit tests. Since all of the code deals with a remote database, writing mocks would insanely difficult. There is a shell script that starts up a docker container. The test will fatal error if the pgtest container is not available.
 
+If docker is not located at  `/usr/local/bin/docker`  on your systerm, specify the path in the DOCKER_EXE environment variable before running the tests. 
+
 The tests are very comprehensive. Most code not covered is error handling from the database or network that are not reproducible. 
 
 ## Continuous Integration
