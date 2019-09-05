@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SSLMode Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/SSLMode" class="dashAnchor"></a>
+    <a title="SSLMode Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html">pgswift Docs</a> (33% documented)</p>
+        <p class="header-right"><a href="https://github.com/mlilback/pgswift"><img src="../../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html">pgswift Reference</a>
+        <img id="carat" src="../../img/carat.png" />
+        SSLMode Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Classes/Connection.html">Connection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/PGResult.html">PGResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/PGResult/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/QueryParameter.html">QueryParameter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Enums/NativeType.html">NativeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/PGType.html">PGType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/PostgreSQLStatusErrors.html">PostgreSQLStatusErrors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/ConnectInfo.html">ConnectInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ConnectParam.html">ConnectParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ConnectParam/Name.html">– Name</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ConnectParam/SSLMode.html">– SSLMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/PGNotification.html">PGNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/PostgreSQLError.html">PostgreSQLError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/PostgreSQLError/Code.html">– Code</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>SSLMode</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SSLMode</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">CaseIterable</span></code></pre>
+
+                </div>
+              </div>
+            <p>possible modes for sslMode parameter. Defined at <a href="https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS">PostgreSQL docs</a>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift12ConnectParamV7SSLModeO7disableyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/disable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift12ConnectParamV7SSLModeO7disableyA2EmF">disable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>onlyy try a non-SSL connection</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">disable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift12ConnectParamV7SSLModeO5allowyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/allow" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift12ConnectParamV7SSLModeO5allowyA2EmF">allow</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>first try a non-SSL connection, if that fails, try a SSL connection</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">allow</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift12ConnectParamV7SSLModeO6preferyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/prefer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift12ConnectParamV7SSLModeO6preferyA2EmF">prefer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>first try an SSL connection, if that fails, try a non-SSQL connection</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">prefer</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift12ConnectParamV7SSLModeO7requireyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/require" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift12ConnectParamV7SSLModeO7requireyA2EmF">require</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>only try an SSL connection. If a root CA file is present, verify the certificate in the same way as if verify-ca was specified. This is the default value</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">require</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift12ConnectParamV7SSLModeO8verifyCAyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/verifyCA" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift12ConnectParamV7SSLModeO8verifyCAyA2EmF">verifyCA</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>only try an SSL connection, and verify that the server certificate is issued by a trusted certificate authority (CA)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">verifyCA</span> <span class="o">=</span> <span class="s">"verify-ca"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift12ConnectParamV7SSLModeO10verifyFullyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/verifyFull" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift12ConnectParamV7SSLModeO10verifyFullyA2EmF">verifyFull</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>only try an SSL connection, verify that the server certificate is issued by a trusted CA and that the requested server host name matches that in the certificate</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">verifyFull</span> <span class="o">=</span> <span class="s">"verify-full"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>©2019 Mark Lilback uder <a class="link" href="https://github.com/mlilback/pgswift/blob/master/LICENSE" target="_blank" rel="external">ISC</a> license.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

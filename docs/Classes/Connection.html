@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Connection Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Connection" class="dashAnchor"></a>
+    <a title="Connection Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">pgswift Docs</a> (33% documented)</p>
+        <p class="header-right"><a href="https://github.com/mlilback/pgswift"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">pgswift Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Connection Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Connection.html">Connection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PGResult.html">PGResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PGResult/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/QueryParameter.html">QueryParameter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/NativeType.html">NativeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PGType.html">PGType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PostgreSQLStatusErrors.html">PostgreSQLStatusErrors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectInfo.html">ConnectInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectParam.html">ConnectParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectParam/Name.html">– Name</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectParam/SSLMode.html">– SSLMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PGNotification.html">PGNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PostgreSQLError.html">PostgreSQLError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PostgreSQLError/Code.html">– Code</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Connection</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Connection</span></code></pre>
+
+                </div>
+              </div>
+            <p>Represents a connection to a PostgreSQL server</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/init/deinit"></a>
+                <a name="//apple_ref/swift/Section/init/deinit" class="dashAnchor"></a>
+                <a href="#/init/deinit">
+                  <h3 class="section-name">init/deinit</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC11connectInfoAcA07ConnectD0V_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(connectInfo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC11connectInfoAcA07ConnectD0V_tcfc">init(connectInfo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>designated initializer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">connectInfo</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConnectInfo.html">ConnectInfo</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>connectInfo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the arguments that will be used to open a connection</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC4host4port4user8password6dbname7sslModeACSS_S4SAA12ConnectParamV7SSLModeOtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(host:port:user:password:dbname:sslMode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC4host4port4user8password6dbname7sslModeACSS_S4SAA12ConnectParamV7SSLModeOtcfc">init(host:port:user:password:dbname:sslMode:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes with a fixed set of connection parameters</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">host</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"localhost"</span><span class="p">,</span> <span class="nv">port</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"5432"</span><span class="p">,</span>
+			<span class="nv">user</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span> <span class="nv">dbname</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">sslMode</span><span class="p">:</span>
+	<span class="kt"><a href="../Structs/ConnectParam.html">ConnectParam</a></span><span class="o">.</span><span class="kt">SSLMode</span> <span class="o">=</span> <span class="o">.</span><span class="n">prefer</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>host</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the host to connect to. Defaults to <q>localhost</q></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>port</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The port to connect to, as a string. Defaults to <q>5432</q></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>user</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the user to connect as</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the password for user. Defauls to an empty string</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dbname</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the name of the ddatabase to connect to</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sslMode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the SSL Mode to use. Defaults to .prefer</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC7cloningA2C_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(cloning:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC7cloningA2C_tcfc">init(cloning:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a connection using the same parameters as the specified connection</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">cloning</span><span class="p">:</span> <span class="kt">Connection</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cloning</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The connection to clone</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/open/close"></a>
+                <a name="//apple_ref/swift/Section/open/close" class="dashAnchor"></a>
+                <a href="#/open/close">
+                  <h3 class="section-name">open/close</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC4openyyKF"></a>
+                    <a name="//apple_ref/swift/Method/open()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC4openyyKF">open()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>opens the connection to the database server</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">()</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC5closeyyF"></a>
+                    <a name="//apple_ref/swift/Method/close()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC5closeyyF">close()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>closes the connection to the database server</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">close</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/status"></a>
+                <a name="//apple_ref/swift/Section/status" class="dashAnchor"></a>
+                <a href="#/status">
+                  <h3 class="section-name">status</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC16lastErrorMessageSSvp"></a>
+                    <a name="//apple_ref/swift/Property/lastErrorMessage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC16lastErrorMessageSSvp">lastErrorMessage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>the currently reported last error message from the server</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">lastErrorMessage</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC11isConnectedSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isConnected" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC11isConnectedSbvp">isConnected</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>true if the connection is currently open</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isConnected</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC13serverVersionSSyKF"></a>
+                    <a name="//apple_ref/swift/Method/serverVersion()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC13serverVersionSSyKF">serverVersion()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the version of the server. Only works if a connection is open.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">serverVersion</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the server version string</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/transactions"></a>
+                <a name="//apple_ref/swift/Section/transactions" class="dashAnchor"></a>
+                <a href="#/transactions">
+                  <h3 class="section-name">transactions</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC15withTransaction4bodyxSgAfCKXE_tKlF"></a>
+                    <a name="//apple_ref/swift/Method/withTransaction(body:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC15withTransaction4bodyxSgAfCKXE_tKlF">withTransaction(body:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Wraps a closure in a transaction. If an error is thrown,
+performs a rollback. Otherwise, performs a commit.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    any errors executing the query
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">withTransaction</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">body</span><span class="p">:</span> <span class="p">(</span><span class="kt">Connection</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>body</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure to execute. Passed the connection to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the value returned from the body closure</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/sql%20execution"></a>
+                <a name="//apple_ref/swift/Section/sql execution" class="dashAnchor"></a>
+                <a href="#/sql%20execution">
+                  <h3 class="section-name">sql execution</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC7execute5queryAA8PGResultCSS_tKF"></a>
+                    <a name="//apple_ref/swift/Method/execute(query:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC7execute5queryAA8PGResultCSS_tKF">execute(query:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the query and returns the results</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    if connection isn&rsquo;t open, or don&rsquo;t get a valid response
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">execute</span><span class="p">(</span><span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PGResult.html">PGResult</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>query</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>query to perform</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the results of that query</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC7execute5query10parametersAA8PGResultCSS_SayAA14QueryParameterCSgGtKF"></a>
+                    <a name="//apple_ref/swift/Method/execute(query:parameters:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC7execute5query10parametersAA8PGResultCSS_SayAA14QueryParameterCSgGtKF">execute(query:parameters:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Execute a query with parameters</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    if connection not open, don&rsquo;t get a valid response, query parameter mismatch
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">execute</span><span class="p">(</span><span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">parameters</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/QueryParameter.html">QueryParameter</a></span><span class="p">?])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PGResult.html">PGResult</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>query</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the query string with placeholders ($1,$2, etc.) for each parameter</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parameters</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>array of QueryParameters</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the results of the query</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC13executeBinary5queryAA8PGResultCSS_tKF"></a>
+                    <a name="//apple_ref/swift/Method/executeBinary(query:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC13executeBinary5queryAA8PGResultCSS_tKF">executeBinary(query:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Execute the query and returns the results. Internally transfers data in binary format</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    if connection isn&rsquo;t open, or don&rsquo;t get a valid response
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">executeBinary</span><span class="p">(</span><span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PGResult.html">PGResult</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>query</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>query to perform</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the results of that query</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC17getSingleRowValue5queryxSgSS_tKlF"></a>
+                    <a name="//apple_ref/swift/Method/getSingleRowValue(query:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC17getSingleRowValue5queryxSgSS_tKlF">getSingleRowValue(query:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the value of row 0, column 0 of a query that returns 1 row and 1 column</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    if the data types don&rsquo;t match, or an error executing query
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">getSingleRowValue</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>query</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a query that should return 1 row with 1 column</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the value</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Notify/Listen"></a>
+                <a name="//apple_ref/swift/Section/Notify/Listen" class="dashAnchor"></a>
+                <a href="#/Notify/Listen">
+                  <h3 class="section-name">Notify/Listen</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift10ConnectionC6listen9toChannel5queue8callbackSo23OS_dispatch_source_read_pSS_So0h1_i1_F0CyAA14PGNotificationVSg_s5Error_pSgtctKF"></a>
+                    <a name="//apple_ref/swift/Method/listen(toChannel:queue:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift10ConnectionC6listen9toChannel5queue8callbackSo23OS_dispatch_source_read_pSS_So0h1_i1_F0CyAA14PGNotificationVSg_s5Error_pSgtctKF">listen(toChannel:queue:callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a dispatch read source for this connection that will call <code>callback</code> on <code>queue</code> when a notification is received</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    if fails to get the socket for the connection
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listen</span><span class="p">(</span><span class="n">toChannel</span> <span class="nv">channel</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">notification</span><span class="p">:</span> <span class="kt"><a href="../Structs/PGNotification.html">PGNotification</a></span><span class="p">?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">DispatchSourceRead</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>channel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the channel to register for</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the queue to create the DispatchSource on</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>notification</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The notification received from the database</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Any error while reading the notification. If not nil, the source will have been canceled</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the dispatch socket to activate</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>©2019 Mark Lilback uder <a class="link" href="https://github.com/mlilback/pgswift/blob/master/LICENSE" target="_blank" rel="external">ISC</a> license.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

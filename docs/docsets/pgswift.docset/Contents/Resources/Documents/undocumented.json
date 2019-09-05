@@ -1,0 +1,1741 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 59,
+      "symbol": "PostgreSQLError.Code.warning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 60,
+      "symbol": "PostgreSQLError.Code.dynamicResultSetsReturned",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 61,
+      "symbol": "PostgreSQLError.Code.implicitZeroBitPadding",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 62,
+      "symbol": "PostgreSQLError.Code.nullValueEliminatedInSetFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 63,
+      "symbol": "PostgreSQLError.Code.privilegeNotGranted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 64,
+      "symbol": "PostgreSQLError.Code.privilegeNotRevoked",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 65,
+      "symbol": "PostgreSQLError.Code.stringDataRightTruncationWarning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 66,
+      "symbol": "PostgreSQLError.Code.deprecatedFeature",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 68,
+      "symbol": "PostgreSQLError.Code.noData",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 69,
+      "symbol": "PostgreSQLError.Code.noAdditionalDynamicResultSetsReturned",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 71,
+      "symbol": "PostgreSQLError.Code.sqlStatementNotYetComplete",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 73,
+      "symbol": "PostgreSQLError.Code.connectionException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 74,
+      "symbol": "PostgreSQLError.Code.connectionDoesNotExist",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 75,
+      "symbol": "PostgreSQLError.Code.connectionFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 76,
+      "symbol": "PostgreSQLError.Code.sqlclientUnableToEstablishSqlconnection",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 77,
+      "symbol": "PostgreSQLError.Code.sqlserverRejectedEstablishmentOfSqlconnection",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 78,
+      "symbol": "PostgreSQLError.Code.transactionResolutionUnknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 79,
+      "symbol": "PostgreSQLError.Code.protocolViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 81,
+      "symbol": "PostgreSQLError.Code.triggeredActionException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 83,
+      "symbol": "PostgreSQLError.Code.featureNotSupported",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 85,
+      "symbol": "PostgreSQLError.Code.invalidTransactionInitiation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 87,
+      "symbol": "PostgreSQLError.Code.locatorException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 88,
+      "symbol": "PostgreSQLError.Code.invalidLocatorSpecification",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 90,
+      "symbol": "PostgreSQLError.Code.invalidGrantor",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 91,
+      "symbol": "PostgreSQLError.Code.invalidGrantOperation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 93,
+      "symbol": "PostgreSQLError.Code.invalidRoleSpecification",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 95,
+      "symbol": "PostgreSQLError.Code.diagnosticsException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 96,
+      "symbol": "PostgreSQLError.Code.stackedDiagnosticsAccessedWithoutActiveHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 98,
+      "symbol": "PostgreSQLError.Code.caseNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 100,
+      "symbol": "PostgreSQLError.Code.cardinalityViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 102,
+      "symbol": "PostgreSQLError.Code.dataException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 103,
+      "symbol": "PostgreSQLError.Code.arraySubscriptError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 104,
+      "symbol": "PostgreSQLError.Code.characterNotInRepertoire",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 105,
+      "symbol": "PostgreSQLError.Code.datetimeFieldOverflow",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 106,
+      "symbol": "PostgreSQLError.Code.divisionByZero",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 107,
+      "symbol": "PostgreSQLError.Code.errorInAssignment",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 108,
+      "symbol": "PostgreSQLError.Code.escapeCharacterConflict",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 109,
+      "symbol": "PostgreSQLError.Code.indicatorOverflow",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 110,
+      "symbol": "PostgreSQLError.Code.intervalFieldOverflow",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 111,
+      "symbol": "PostgreSQLError.Code.invalidArgumentForLogarithm",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 112,
+      "symbol": "PostgreSQLError.Code.invalidArgumentForNtileFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 113,
+      "symbol": "PostgreSQLError.Code.invalidArgumentForNthValueFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 114,
+      "symbol": "PostgreSQLError.Code.invalidArgumentForPowerFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 115,
+      "symbol": "PostgreSQLError.Code.invalidArgumentForWidthBucketFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 116,
+      "symbol": "PostgreSQLError.Code.invalidCharacterValueForCast",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 117,
+      "symbol": "PostgreSQLError.Code.invalidDatetimeFormat",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 118,
+      "symbol": "PostgreSQLError.Code.invalidEscapeCharacter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 119,
+      "symbol": "PostgreSQLError.Code.invalidEscapeOctet",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 120,
+      "symbol": "PostgreSQLError.Code.invalidEscapeSequence",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 121,
+      "symbol": "PostgreSQLError.Code.nonstandardUseOfEscapeCharacter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 122,
+      "symbol": "PostgreSQLError.Code.invalidIndicatorParameterValue",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 123,
+      "symbol": "PostgreSQLError.Code.invalidParameterValue",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 124,
+      "symbol": "PostgreSQLError.Code.invalidRegularExpression",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 125,
+      "symbol": "PostgreSQLError.Code.invalidRowCountInLimitClause",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 126,
+      "symbol": "PostgreSQLError.Code.invalidRowCountInResultOffsetClause",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 127,
+      "symbol": "PostgreSQLError.Code.invalidTablesampleArgument",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 128,
+      "symbol": "PostgreSQLError.Code.invalidTablesampleRepeat",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 129,
+      "symbol": "PostgreSQLError.Code.invalidTimeZoneDisplacementValue",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 130,
+      "symbol": "PostgreSQLError.Code.invalidUseOfEscapeCharacter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 131,
+      "symbol": "PostgreSQLError.Code.mostSpecificTypeMismatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 132,
+      "symbol": "PostgreSQLError.Code.nullValueNotAllowed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 133,
+      "symbol": "PostgreSQLError.Code.nullValueNoIndicatorParameter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 134,
+      "symbol": "PostgreSQLError.Code.numericValueOutOfRange",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 135,
+      "symbol": "PostgreSQLError.Code.stringDataLengthMismatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 136,
+      "symbol": "PostgreSQLError.Code.stringDataRightTruncationException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 137,
+      "symbol": "PostgreSQLError.Code.substringError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 138,
+      "symbol": "PostgreSQLError.Code.trimError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 139,
+      "symbol": "PostgreSQLError.Code.unterminatedCString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 140,
+      "symbol": "PostgreSQLError.Code.zeroLengthCharacterString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 141,
+      "symbol": "PostgreSQLError.Code.floatingPointException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 142,
+      "symbol": "PostgreSQLError.Code.invalidTextRepresentation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 143,
+      "symbol": "PostgreSQLError.Code.invalidBinaryRepresentation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 144,
+      "symbol": "PostgreSQLError.Code.badCopyFileFormat",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 145,
+      "symbol": "PostgreSQLError.Code.untranslatableCharacter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 146,
+      "symbol": "PostgreSQLError.Code.notAnXmlDocument",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 147,
+      "symbol": "PostgreSQLError.Code.invalidXmlDocument",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 148,
+      "symbol": "PostgreSQLError.Code.invalidXmlContent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 149,
+      "symbol": "PostgreSQLError.Code.invalidXmlComment",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 150,
+      "symbol": "PostgreSQLError.Code.invalidXmlProcessingInstruction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 152,
+      "symbol": "PostgreSQLError.Code.integrityConstraintViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 153,
+      "symbol": "PostgreSQLError.Code.restrictViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 154,
+      "symbol": "PostgreSQLError.Code.notNullViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 155,
+      "symbol": "PostgreSQLError.Code.foreignKeyViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 156,
+      "symbol": "PostgreSQLError.Code.uniqueViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 157,
+      "symbol": "PostgreSQLError.Code.checkViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 158,
+      "symbol": "PostgreSQLError.Code.exclusionViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 160,
+      "symbol": "PostgreSQLError.Code.invalidCursorState",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 162,
+      "symbol": "PostgreSQLError.Code.invalidTransactionState",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 163,
+      "symbol": "PostgreSQLError.Code.activeSqlTransaction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 164,
+      "symbol": "PostgreSQLError.Code.branchTransactionAlreadyActive",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 165,
+      "symbol": "PostgreSQLError.Code.heldCursorRequiresSameIsolationLevel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 166,
+      "symbol": "PostgreSQLError.Code.inappropriateAccessModeForBranchTransaction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 167,
+      "symbol": "PostgreSQLError.Code.inappropriateIsolationLevelForBranchTransaction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 168,
+      "symbol": "PostgreSQLError.Code.noActiveSqlTransactionForBranchTransaction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 169,
+      "symbol": "PostgreSQLError.Code.readOnlySqlTransaction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 170,
+      "symbol": "PostgreSQLError.Code.schemaAndDataStatementMixingNotSupported",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 171,
+      "symbol": "PostgreSQLError.Code.noActiveSqlTransaction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 172,
+      "symbol": "PostgreSQLError.Code.inFailedSqlTransaction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 173,
+      "symbol": "PostgreSQLError.Code.idleInTransactionSessionTimeout",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 175,
+      "symbol": "PostgreSQLError.Code.invalidSqlStatementName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 177,
+      "symbol": "PostgreSQLError.Code.triggeredDataChangeViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 179,
+      "symbol": "PostgreSQLError.Code.invalidAuthorizationSpecification",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 180,
+      "symbol": "PostgreSQLError.Code.invalidPassword",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 182,
+      "symbol": "PostgreSQLError.Code.dependentPrivilegeDescriptorsStillExist",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 183,
+      "symbol": "PostgreSQLError.Code.dependentObjectsStillExist",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 185,
+      "symbol": "PostgreSQLError.Code.invalidTransactionTermination",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 187,
+      "symbol": "PostgreSQLError.Code.sqlRoutineException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 188,
+      "symbol": "PostgreSQLError.Code.functionExecutedNoReturnStatement",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 189,
+      "symbol": "PostgreSQLError.Code.modifyingSqlDataNotPermittedSQL",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 190,
+      "symbol": "PostgreSQLError.Code.prohibitedSqlStatementAttemptedSQL",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 191,
+      "symbol": "PostgreSQLError.Code.readingSqlDataNotPermittedSQL",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 193,
+      "symbol": "PostgreSQLError.Code.invalidCursorName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 195,
+      "symbol": "PostgreSQLError.Code.externalRoutineException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 196,
+      "symbol": "PostgreSQLError.Code.containingSqlNotPermitted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 197,
+      "symbol": "PostgreSQLError.Code.modifyingSqlDataNotPermittedExternal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 198,
+      "symbol": "PostgreSQLError.Code.prohibitedSqlStatementAttemptedExternal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 199,
+      "symbol": "PostgreSQLError.Code.readingSqlDataNotPermittedExternal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 201,
+      "symbol": "PostgreSQLError.Code.externalRoutineInvocationException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 202,
+      "symbol": "PostgreSQLError.Code.invalidSqlstateReturned",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 204,
+      "symbol": "PostgreSQLError.Code.triggerProtocolViolated",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 205,
+      "symbol": "PostgreSQLError.Code.srfProtocolViolated",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 206,
+      "symbol": "PostgreSQLError.Code.event_trigger_protocol_violated",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 208,
+      "symbol": "PostgreSQLError.Code.savepointException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 209,
+      "symbol": "PostgreSQLError.Code.invalidSavepointSpecification",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 211,
+      "symbol": "PostgreSQLError.Code.invalidCatalogName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 213,
+      "symbol": "PostgreSQLError.Code.invalidSchemaName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 215,
+      "symbol": "PostgreSQLError.Code.transactionRollback",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 216,
+      "symbol": "PostgreSQLError.Code.transactionIntegrityConstraintViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 217,
+      "symbol": "PostgreSQLError.Code.serializationFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 218,
+      "symbol": "PostgreSQLError.Code.statementCompletionUnknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 219,
+      "symbol": "PostgreSQLError.Code.deadlockDetected",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 221,
+      "symbol": "PostgreSQLError.Code.syntaxErrorOrAccessRuleViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 222,
+      "symbol": "PostgreSQLError.Code.syntaxError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 223,
+      "symbol": "PostgreSQLError.Code.insufficientPrivilege",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 224,
+      "symbol": "PostgreSQLError.Code.cannotCoerce",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 225,
+      "symbol": "PostgreSQLError.Code.groupingError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 226,
+      "symbol": "PostgreSQLError.Code.windowingError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 227,
+      "symbol": "PostgreSQLError.Code.invalidRecursion",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 228,
+      "symbol": "PostgreSQLError.Code.invalidForeignKey",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 229,
+      "symbol": "PostgreSQLError.Code.invalidName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 230,
+      "symbol": "PostgreSQLError.Code.nameTooLong",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 231,
+      "symbol": "PostgreSQLError.Code.reservedName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 232,
+      "symbol": "PostgreSQLError.Code.datatypeMismatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 233,
+      "symbol": "PostgreSQLError.Code.indeterminateDatatype",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 234,
+      "symbol": "PostgreSQLError.Code.collationMismatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 235,
+      "symbol": "PostgreSQLError.Code.indeterminateCollation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 236,
+      "symbol": "PostgreSQLError.Code.wrongObjectType",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 237,
+      "symbol": "PostgreSQLError.Code.undefinedColumn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 238,
+      "symbol": "PostgreSQLError.Code.undefinedFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 239,
+      "symbol": "PostgreSQLError.Code.undefinedTable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 240,
+      "symbol": "PostgreSQLError.Code.undefinedParameter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 241,
+      "symbol": "PostgreSQLError.Code.undefinedObject",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 242,
+      "symbol": "PostgreSQLError.Code.duplicateColumn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 243,
+      "symbol": "PostgreSQLError.Code.duplicateCursor",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 244,
+      "symbol": "PostgreSQLError.Code.duplicateDatabase",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 245,
+      "symbol": "PostgreSQLError.Code.duplicateFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 246,
+      "symbol": "PostgreSQLError.Code.duplicatePreparedStatement",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 247,
+      "symbol": "PostgreSQLError.Code.duplicateSchema",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 248,
+      "symbol": "PostgreSQLError.Code.duplicateTable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 249,
+      "symbol": "PostgreSQLError.Code.duplicateAlias",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 250,
+      "symbol": "PostgreSQLError.Code.duplicateObject",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 251,
+      "symbol": "PostgreSQLError.Code.ambiguousColumn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 252,
+      "symbol": "PostgreSQLError.Code.ambiguousFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 253,
+      "symbol": "PostgreSQLError.Code.ambiguousParameter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 254,
+      "symbol": "PostgreSQLError.Code.ambiguousAlias",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 255,
+      "symbol": "PostgreSQLError.Code.invalidColumnReference",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 256,
+      "symbol": "PostgreSQLError.Code.invalidColumnDefinition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 257,
+      "symbol": "PostgreSQLError.Code.invalidCursorDefinition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 258,
+      "symbol": "PostgreSQLError.Code.invalidDatabaseDefinition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 259,
+      "symbol": "PostgreSQLError.Code.invalidFunctionDefinition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 260,
+      "symbol": "PostgreSQLError.Code.invalidPreparedStatementDefinition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 261,
+      "symbol": "PostgreSQLError.Code.invalidSchemaDefinition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 262,
+      "symbol": "PostgreSQLError.Code.invalidTableDefinition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 263,
+      "symbol": "PostgreSQLError.Code.invalidObjectDefinition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 265,
+      "symbol": "PostgreSQLError.Code.withCheckOptionViolation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 267,
+      "symbol": "PostgreSQLError.Code.insufficientResources",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 268,
+      "symbol": "PostgreSQLError.Code.diskFull",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 269,
+      "symbol": "PostgreSQLError.Code.outOfMemory",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 270,
+      "symbol": "PostgreSQLError.Code.tooManyConnections",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 271,
+      "symbol": "PostgreSQLError.Code.configurationLimitExceeded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 273,
+      "symbol": "PostgreSQLError.Code.programLimitExceeded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 274,
+      "symbol": "PostgreSQLError.Code.statementTooComplex",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 275,
+      "symbol": "PostgreSQLError.Code.tooManyColumns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 276,
+      "symbol": "PostgreSQLError.Code.tooManyArguments",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 278,
+      "symbol": "PostgreSQLError.Code.objectNotInPrerequisiteState",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 279,
+      "symbol": "PostgreSQLError.Code.objectInUse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 280,
+      "symbol": "PostgreSQLError.Code.cantChangeRuntimeParam",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 281,
+      "symbol": "PostgreSQLError.Code.lockNotAvailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 283,
+      "symbol": "PostgreSQLError.Code.operatorIntervention",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 284,
+      "symbol": "PostgreSQLError.Code.queryCanceled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 285,
+      "symbol": "PostgreSQLError.Code.adminShutdown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 286,
+      "symbol": "PostgreSQLError.Code.crashShutdown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 287,
+      "symbol": "PostgreSQLError.Code.cannotConnectNow",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 288,
+      "symbol": "PostgreSQLError.Code.databaseDropped",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 290,
+      "symbol": "PostgreSQLError.Code.systemError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 291,
+      "symbol": "PostgreSQLError.Code.ioError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 292,
+      "symbol": "PostgreSQLError.Code.undefinedFile",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 293,
+      "symbol": "PostgreSQLError.Code.duplicateFile",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 295,
+      "symbol": "PostgreSQLError.Code.snapshotTooOld",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 297,
+      "symbol": "PostgreSQLError.Code.configFileError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 298,
+      "symbol": "PostgreSQLError.Code.lockFileExists",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 300,
+      "symbol": "PostgreSQLError.Code.fdwError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 301,
+      "symbol": "PostgreSQLError.Code.fdwColumnNameNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 302,
+      "symbol": "PostgreSQLError.Code.fdwDynamicParameterValueNeeded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 303,
+      "symbol": "PostgreSQLError.Code.fdwFunctionSequenceError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 304,
+      "symbol": "PostgreSQLError.Code.fdwInconsistentDescriptorInformation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 305,
+      "symbol": "PostgreSQLError.Code.fdwInvalidAttributeValue",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 306,
+      "symbol": "PostgreSQLError.Code.fdwInvalidColumnName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 307,
+      "symbol": "PostgreSQLError.Code.fdwInvalidColumnNumber",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 308,
+      "symbol": "PostgreSQLError.Code.fdwInvalidDataType",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 309,
+      "symbol": "PostgreSQLError.Code.fdwInvalidDataTypeDescriptors",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 310,
+      "symbol": "PostgreSQLError.Code.fdwInvalidDescriptorFieldIdentifier",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 311,
+      "symbol": "PostgreSQLError.Code.fdwInvalidHandle",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 312,
+      "symbol": "PostgreSQLError.Code.fdwInvalidOptionIndex",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 313,
+      "symbol": "PostgreSQLError.Code.fdwInvalidOptionName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 314,
+      "symbol": "PostgreSQLError.Code.fdwInvalidStringLengthOrBufferLength",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 315,
+      "symbol": "PostgreSQLError.Code.fdwInvalidStringFormat",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 316,
+      "symbol": "PostgreSQLError.Code.fdwInvalidUseOfNullPointer",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 317,
+      "symbol": "PostgreSQLError.Code.fdwTooManyHandles",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 318,
+      "symbol": "PostgreSQLError.Code.fdwOutOfMemory",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 319,
+      "symbol": "PostgreSQLError.Code.fdwNoSchemas",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 320,
+      "symbol": "PostgreSQLError.Code.fdwOptionNameNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 321,
+      "symbol": "PostgreSQLError.Code.fdwReplyHandle",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 322,
+      "symbol": "PostgreSQLError.Code.fdwSchemaNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 323,
+      "symbol": "PostgreSQLError.Code.fdwTableNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 324,
+      "symbol": "PostgreSQLError.Code.fdwUnableToCreateExecution",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 325,
+      "symbol": "PostgreSQLError.Code.fdwUnableToCreateReply",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 326,
+      "symbol": "PostgreSQLError.Code.fdwUnableToEstablishConnection",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 327,
+      "symbol": "PostgreSQLError.Code.plpgsqlError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 328,
+      "symbol": "PostgreSQLError.Code.raiseException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 329,
+      "symbol": "PostgreSQLError.Code.noDataFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 330,
+      "symbol": "PostgreSQLError.Code.tooManyRows",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 331,
+      "symbol": "PostgreSQLError.Code.assertFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 333,
+      "symbol": "PostgreSQLError.Code.internalError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 334,
+      "symbol": "PostgreSQLError.Code.dataCorrupted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 335,
+      "symbol": "PostgreSQLError.Code.indexCorrupted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 337,
+      "symbol": "PostgreSQLError.Code.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/Errors.swift",
+      "line": 344,
+      "symbol": "PostgreSQLError.init(code:errorMessage:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 330,
+      "symbol": "PGResult.Status.commandOk",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 331,
+      "symbol": "PGResult.Status.tuplesOk",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 332,
+      "symbol": "PGResult.Status.copyOut",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 333,
+      "symbol": "PGResult.Status.copyIn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 334,
+      "symbol": "PGResult.Status.copyBoth",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 335,
+      "symbol": "PGResult.Status.badResponse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 336,
+      "symbol": "PGResult.Status.nonFatalError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 337,
+      "symbol": "PGResult.Status.fatalError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 338,
+      "symbol": "PGResult.Status.emptyQuery",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mlilback/working/rc2/pgswift/Sources/pgswift/PGResult.swift",
+      "line": 339,
+      "symbol": "PGResult.Status.singleTuple",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mlilback/working/rc2/pgswift"
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>pgswift  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="pgswift  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">pgswift Docs</a> (33% documented)</p>
+        <p class="header-right"><a href="https://github.com/mlilback/pgswift"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">pgswift Reference</a>
+        <img id="carat" src="img/carat.png" />
+        pgswift  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Connection.html">Connection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/PGResult.html">PGResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/PGResult/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/QueryParameter.html">QueryParameter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/NativeType.html">NativeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PGType.html">PGType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PostgreSQLStatusErrors.html">PostgreSQLStatusErrors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/ConnectInfo.html">ConnectInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ConnectParam.html">ConnectParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ConnectParam/Name.html">– Name</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ConnectParam/SSLMode.html">– SSLMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PGNotification.html">PGNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PostgreSQLError.html">PostgreSQLError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PostgreSQLError/Code.html">– Code</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='pgswift' class='heading'>pgswift</h1>
+
+<p><img src="https://img.shields.io/badge/Swift-5.0-orange" alt="Swift 5.0">  <a href="https://img.shields.io/github/license/mlilback/pgswift">License: ISC</a> <a href="https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey">platforms: macOS  | Linux</a> </p>
+
+<p>A PostgreSQL driver for use in swift. Requires Swift 5.0+. Builds with Swift Package Manager. It depends on libpq being available, but the package manager knows how install that vai brew/apt-get. </p>
+
+<p>Every other driver I&rsquo;ve seen requires as associated ORM system. I just want raw calls to postgresql.</p>
+
+<p>This is being actively developed. Not even close to a release, though it has enough basic features to use in a <a href="https://kitura.io/">Kitura</a> app I&rsquo;m building.</p>
+
+<p>The one feature that sets it apart from the other libraries (to me) is support for notifications (LISTEN/NOTIFY) using a DispatchQueue &mdash; the only other implementation I&rsquo;ve seen uses polling!</p>
+<h2 id='testing' class='heading'>Testing</h2>
+
+<p>XCTest is used, but they are integration/system tests, not unit tests. Since all of the code deals with a remote database, writing mocks would insanely difficult. There is a shell script that starts up a docker container. The test will fatal error if the pgtest container is not available.</p>
+
+<p>The tests are very comprehensive. Most code not covered is error handling from the database or network that are not reproducible. </p>
+<h2 id='continuous-integration' class='heading'>Continuous Integration</h2>
+
+<p>CircleCI doesn&rsquo;t support macOS. Travis doesn&rsquo;t support using docker containers on macOS. That means no CI.</p>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<p><a href="https://github.com/mlilback/pgswift/docs/">API documentation</a> is enerated using <a href="https://github.com/realm/jazzy">jazzy</a>. It uses Ruby, so I&rsquo;d highly recommend using <a href="https://github.com/rbenv/rbenv">rbenv</a> instead of the system Ruby since the syystem Ruby is old and deprectated in Catalina.  And you&rsquo;d have to use sudo to install it in system directories.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>©2019 Mark Lilback uder <a class="link" href="https://github.com/mlilback/pgswift/blob/master/LICENSE" target="_blank" rel="external">ISC</a> license.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

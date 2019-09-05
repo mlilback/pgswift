@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PostgreSQLStatusErrors Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/PostgreSQLStatusErrors" class="dashAnchor"></a>
+    <a title="PostgreSQLStatusErrors Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">pgswift Docs</a> (33% documented)</p>
+        <p class="header-right"><a href="https://github.com/mlilback/pgswift"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">pgswift Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        PostgreSQLStatusErrors Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Connection.html">Connection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PGResult.html">PGResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PGResult/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/QueryParameter.html">QueryParameter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/NativeType.html">NativeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PGType.html">PGType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PostgreSQLStatusErrors.html">PostgreSQLStatusErrors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectInfo.html">ConnectInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectParam.html">ConnectParam</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectParam/Name.html">– Name</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectParam/SSLMode.html">– SSLMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PGNotification.html">PGNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PostgreSQLError.html">PostgreSQLError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PostgreSQLError/Code.html">– Code</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PostgreSQLStatusErrors</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">PostgreSQLStatusErrors</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                </div>
+              </div>
+            <p>Programming errors</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO11alreadyOpenyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/alreadyOpen" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO11alreadyOpenyA2CmF">alreadyOpen</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>called open() when the connection was already opened</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">alreadyOpen</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO11badResponseyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/badResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO11badResponseyA2CmF">badResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>the server sent back an irregular response</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">badResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO10emptyQueryyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/emptyQuery" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO10emptyQueryyA2CmF">emptyQuery</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>thrown when getting a single value and no rows were returned</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">emptyQuery</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO21unsupportedDataFormatyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/unsupportedDataFormat" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO21unsupportedDataFormatyA2CmF">unsupportedDataFormat</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>thrown when a requested value type does not match what is supported by the PGType</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unsupportedDataFormat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO16invalidRowNumberyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidRowNumber" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO16invalidRowNumberyA2CmF">invalidRowNumber</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>thrown when PGResult is asked to get a value for invalid row number</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidRowNumber</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO19invalidColumnNumberyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidColumnNumber" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO19invalidColumnNumberyA2CmF">invalidColumnNumber</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>thrown when PGResult is asked to get a value for invalid column number</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidColumnNumber</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO17invalidColumnNameyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidColumnName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO17invalidColumnNameyA2CmF">invalidColumnName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>thrown when PGResult is asked to get a value for an invalid column name</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidColumnName</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO19internalQueryFailedyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/internalQueryFailed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO19internalQueryFailedyA2CmF">internalQueryFailed</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>a query hardcoded in this library failed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">internalQueryFailed</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO12invalidQueryyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidQuery" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO12invalidQueryyA2CmF">invalidQuery</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>query does not meet requirements of function call</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidQuery</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO11invalidTypeyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO11invalidTypeyA2CmF">invalidType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>when caller specifies a type and result is not that type</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO19floatsMustbeDoublesyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/floatsMustbeDoubles" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO19floatsMustbeDoublesyA2CmF">floatsMustbeDoubles</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>when setting parameters for a query, float columns must be specified as doubles</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">floatsMustbeDoubles</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7pgswift22PostgreSQLStatusErrorsO11callerErroryA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/callerError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7pgswift22PostgreSQLStatusErrorsO11callerErroryA2CmF">callerError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>when user code in a closure fails</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">callerError</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>©2019 Mark Lilback uder <a class="link" href="https://github.com/mlilback/pgswift/blob/master/LICENSE" target="_blank" rel="external">ISC</a> license.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
