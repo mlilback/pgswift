@@ -63,7 +63,10 @@ public class PGResult {
 		self.connection = connection
 		self.status = Status(result)
 		let colCount = Int(PQnfields(result))
-		columnNames = (0..<colCount).map { return String(utf8String: PQfname(result, Int32($0))) ?? "" }
+		columnNames = (0..<colCount).map {
+			let rawString =  PQfname(result, Int32($0))!
+			return String(utf8String: rawString) ?? ""
+		}
 		columnFormats = (0..<colCount).map { return PQfformat(result, Int32($0))  == 0 ? .string : .binary }
 		columnTypes = (0..<colCount).map { return PGType(rawValue: PQftype(result, Int32($0))) ?? .unsupported }
 		dateFormatter = ISO8601DateFormatter()
@@ -91,27 +94,59 @@ public class PGResult {
 	/// - Returns: the value
 	/// - Throws: if any parameter is invalid, if the column's NativeType doesn't match T
 	public func getValue<T>(row: Int, column: Int) throws -> T? {
-		guard PQgetisnull(result, Int32(row), Int32(column)) == 0 else { return nil }
+		let isnull = PQgetisnull(result, Int32(row), Int32(column))
+		guard isnull == 0 else { return nil }
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 		guard row < rowCount else { throw PostgreSQLStatusErrors.invalidRowNumber }
-		guard columnTypes[column].nativeType.metaType() == T.self
+		let colType = columnTypes[column].nativeType
+		guard colType.isValid(type: T.self)
 			else { throw PostgreSQLStatusErrors.invalidType }
-
+		let optional = colType.optionalMetaType() == T.self
 		switch columnTypes[column].nativeType {
 		case .bool:
-			return try getBoolValue(row: row, column: column) as? T
+			if optional {
+				let value: Bool? = try (getBoolValue(row: row, column: column))
+				return value as? T
+			} else {
+				return try getBoolValue(row: row, column: column) as? T
+			}
 		case .int:
-			return try getIntValue(row: row, column: column) as? T
+			if optional {
+				let value: Int? = try (getIntValue(row: row, column: column))
+				return value as? T
+			} else {
+				return try getIntValue(row: row, column: column) as? T
+			}
 		case .float:
-			return try getFloatValue(row: row, column: column) as? T
+			fallthrough
 		case .double:
-			return try getDoubleValue(row: row, column: column) as? T
+			if optional {
+				let value: Double? = try (getDoubleValue(row: row, column: column))
+				return value as? T
+			} else {
+				return try getFloatValue(row: row, column: column) as? T
+			}
 		case .string:
-			return try getStringValue(row: row, column: column) as? T
+			if optional {
+				let value: String? = try (getStringValue(row: row, column: column))
+				return value as? T
+			} else {
+				return try getStringValue(row: row, column: column) as? T
+			}
 		case .date:
-			return try getDateValue(row: row, column: column) as? T
+			if optional {
+				let value: Date? = try (getDateValue(row: row, column: column))
+				return value as? T
+			} else {
+				return try getDateValue(row: row, column: column) as? T
+			}
 		case .data:
-			return try getDataValue(row: row, column: column) as? T
+			if optional {
+				let value: Data? = try (getDataValue(row: row, column: column))
+				return value as? T
+			} else {
+				return try getDataValue(row: row, column: column) as? T
+			}
 		}
 	}
 	

@@ -162,5 +162,28 @@ public enum NativeType: String, CaseIterable {
 		case .date: return Date.self
 		}
 	}
+	
+	/// Returns the metaType() wrapped in an Optional
+	///
+	/// - Returns: metaType() wraapped in an Optional
+	public func optionalMetaType() -> Any.Type {
+		switch self {
+		case .int: return Optional<Int>.self
+		case .bool: return Optional<Bool>.self
+		case .float: return Optional<Double>.self
+		case .double: return Optional<Double>.self
+		case .string: return Optional<String>.self
+		case .data: return Optional<Data>.self
+		case .date: return Optional<Date>.self
+		}
+	}
+	
+	/// Compares the supplied type with both the metaType() and the optionalMetaType()
+	///
+	/// - Parameter type: the Type to compare
+	/// - Returns: true if type matches the metaType() or optionalMetaType()
+	public func isValid(type: Any.Type) -> Bool {
+		return type == metaType() || type == optionalMetaType()
+	}
 
 }
