@@ -10,6 +10,8 @@ import CLibpq
 
 /// Programming errors
 public enum PostgreSQLStatusErrors: Error {
+	/// failed to connect
+	case connectionFailed
 	/// called open() when the connection was already opened
 	case alreadyOpen
 	/// the server sent back an irregular response

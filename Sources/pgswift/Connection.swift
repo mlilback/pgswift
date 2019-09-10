@@ -83,6 +83,8 @@ public final class Connection {
 				pgConnection = PQconnectdbParams(keywords, values, 0)
 			}
 			precondition(pgConnection != nil, "PQconnect returned nil, which means failed to alloc memory which should be  impossible")
+			logger.info("connection status on open is \(PQstatus(pgConnection!))")
+			guard isConnectedRaw else { throw PostgreSQLStatusErrors.connectionFailed }
 			hasIntegerDatetimes = getBooleanParameter(key: "integer_datetimes", defaultValue: true)
 			// surpress notifications and warnings from the server. we handle our own way
 			do {
