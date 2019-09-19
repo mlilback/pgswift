@@ -160,7 +160,7 @@ public class PGResult {
 	///           or if the column's NativeType doesn't match T
 	public func getValue<T>(row: Int, columnName: String) throws -> T? {
 		let possibleColNum = columnNames.firstIndex { $0.caseInsensitiveCompare(columnName) == .orderedSame }
-		guard let colNum = possibleColNum else { throw PostgreSQLStatusErrors.invalidColumnName }
+		guard let colNum = possibleColNum else { print("failed to find column \(columnName)"); throw PostgreSQLStatusErrors.invalidColumnName }
 		return try getValue(row: row, column: colNum)
 	}
 	
