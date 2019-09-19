@@ -26,7 +26,6 @@ public final class Connection {
 	
 	private static var nextQueueNumber = 1
 	private let conQueue: DispatchQueue
-	private let lock = DispatchSemaphore(value: 1)
 	
 	// MARK: - init/deinit
 	
@@ -78,8 +77,6 @@ public final class Connection {
 	
 	/// opens the connection to the database server
 	public func open() throws {
-		lock.wait()
-		defer { lock.signal() }
 		try conQueue.sync {
 			guard pgConnection == nil else { throw PostgreSQLStatusErrors.alreadyOpen }
 			connectInfo.withParamterCStrings { (keywords, values) -> () in
@@ -105,8 +102,6 @@ public final class Connection {
 	
 	/// closes the connection to the database server
 	public func close() {
-		lock.wait()
-		defer { lock.signal() }
 		conQueue.sync {
 			guard let pgcon = pgConnection  else { return }
 			PQfinish(pgcon)
@@ -118,8 +113,6 @@ public final class Connection {
 	
 	/// the currently reported last error message from the server
 	public var lastErrorMessage: String {
-		lock.wait()
-		defer { lock.signal() }
 		return conQueue.sync {
 			return lastErrorMessageRaw()
 		}
@@ -132,8 +125,6 @@ public final class Connection {
 	
 	/// true if the connection is currently open
 	public var isConnected: Bool {
-		lock.wait()
-		defer { lock.signal() }
 		return conQueue.sync {
 			return pgConnection != nil && PQstatus(pgConnection!) == CONNECTION_OK
 		}
@@ -146,8 +137,6 @@ public final class Connection {
 	
 	/// Throws an error if the connection is nil or not connected
 	func validateConnection() throws {
-		lock.wait()
-		defer { lock.signal() }
 		try conQueue.sync {
 			guard pgConnection != nil else { throw PostgreSQLError(code: .connectionDoesNotExist, connection: self) }
 			guard isConnectedRaw else
@@ -202,11 +191,8 @@ public final class Connection {
 	internal func withPGConnection(body: (PGConnection) -> Void) {
 		guard isConnected, let pgcon = pgConnection else
 		{ precondition(isConnected, "database not connected"); return }
-		lock.wait()
-		defer { lock.signal() }
-		conQueue.sync {
-			body(pgcon)
-		}
+		// don't wrap in conQueue because body will be calling our methods that lock it
+		body(pgcon)
 	}
 	
 	// MARK: - private helper methods
@@ -265,8 +251,6 @@ public final class Connection {
 	/// - Throws: if connection isn't open, or don't get a valid response
 	@discardableResult
 	public func execute(query: String) throws -> PGResult {
-		lock.wait()
-		defer { lock.signal() }
 		return try conQueue.sync {
 			guard isConnectedRaw, let pgcon = pgConnection else {
 				throw PostgreSQLError(code: .connectionDoesNotExist , errorMessage: "no connnection")
@@ -286,8 +270,6 @@ public final class Connection {
 	/// - Throws: if connection not open, don't get a valid response, query parameter mismatch
 	@discardableResult
 	public func execute(query: String, parameters: [QueryParameter?]) throws -> PGResult {
-		lock.wait()
-		defer { lock.signal() }
 		return try conQueue.sync {
 			guard isConnectedRaw, let pgcon = pgConnection else {
 				throw PostgreSQLError(code: .connectionDoesNotExist , errorMessage: "no connnection")
@@ -307,8 +289,6 @@ public final class Connection {
 	/// - Throws: if connection isn't open, or don't get a valid response
 	@discardableResult
 	public func executeBinary(query: String) throws -> PGResult {
-		lock.wait()
-		defer { lock.signal() }
 		return try conQueue.sync {
 			guard isConnectedRaw, let pgcon = pgConnection else {
 				throw PostgreSQLError(code: .connectionDoesNotExist , errorMessage: "no connnection")
@@ -328,8 +308,6 @@ public final class Connection {
 	/// - Throws: if the data types don't match, or an error executing query
 	public func getSingleRowValue<T>(query: String) throws -> T? {
 		guard query.count > 0 else { throw PostgreSQLStatusErrors.emptyQuery }
-		lock.wait()
-		defer { lock.signal() }
 		return try conQueue.sync {
 			let result = try executeRaw(query: query)
 			guard result.columnCount == 1, result.rowCount == 1 else { throw PostgreSQLStatusErrors.invalidQuery }
@@ -353,8 +331,6 @@ public final class Connection {
 	/// - Returns: the dispatch socket to activate
 	/// - Throws: if fails to get the socket for the connection
 	public func listen(toChannel channel: String, queue: DispatchQueue, callback: @escaping (_ notification: PGNotification?, _ error: Error?) -> Void) throws -> DispatchSourceRead {
-		lock.wait()
-		defer { lock.signal() }
 		return try conQueue.sync { () -> DispatchSourceRead in
 			guard let pgcon = self.pgConnection else
 				{ throw PostgreSQLError(code: .connectionDoesNotExist, errorMessage: "connection does not exist") }
@@ -372,8 +348,11 @@ public final class Connection {
 					PQconsumeInput(con)
 					while let pgNotify = PQnotifies(con) {
 						let notification = PGNotification(pgNotify: pgNotify.pointee)
-						callback(notification, nil)
 						PQfreemem(pgNotify)
+						// in case notification callback wants to use the database, we need to exit conQueue.seync before cvallback is handled
+						DispatchQueue.global().async {
+							callback(notification, nil)
+						}
 					}
 				}
 			}
