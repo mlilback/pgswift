@@ -63,6 +63,10 @@ public class PGResult {
 		self.connection = connection
 		self.status = Status(result)
 		let colCount = Int(PQnfields(result))
+		if colCount < 0 {
+			logger.error("got col count of -1")
+			fatalError("got col count of -1")
+		}
 		columnNames = (0..<colCount).map {
 			let rawString =  PQfname(result, Int32($0))!
 			return String(utf8String: rawString) ?? ""
@@ -94,6 +98,7 @@ public class PGResult {
 	/// - Returns: the value
 	/// - Throws: if any parameter is invalid, if the column's NativeType doesn't match T
 	public func getValue<T>(row: Int, column: Int) throws -> T? {
+		precondition(row >= 0 && column >= 0)
 		let isnull = PQgetisnull(result, Int32(row), Int32(column))
 		guard isnull == 0 else { return nil }
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
@@ -172,6 +177,7 @@ public class PGResult {
 	/// - Returns: the value as a string, or nil if NULL
 	/// - Throws: if an invalid column number
 	public func getDataValue(row: Int, column: Int) throws -> Data? {
+		precondition(row >= 0 && column >= 0)
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 
 		let size = Int(PQgetlength(result, Int32(row), Int32(column)))
@@ -199,6 +205,7 @@ public class PGResult {
 	/// - Returns: the value as a string, or nil if NULL
 	/// - Throws: if value not easily convertible to a string, or if an invalid column number
 	public func getStringValue(row: Int, column: Int) throws -> String? {
+		precondition(row >= 0 && column >= 0)
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 		// binary and string format are the same
 		// guard PQfformat(result, Int32(column)) == 0 else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
@@ -337,6 +344,7 @@ public class PGResult {
 	
 	@inline(__always)
 	private func setupValue(row: Int, column: Int) throws -> UnsafePointer<UInt8>? {
+		precondition(row >= 0 && column >= 0)
 		guard column < columnNames.count else { throw PostgreSQLError(code: .numericValueOutOfRange, connection: connection!) }
 		let colNum = Int32(column)
 		let rowNum = Int32(row)
@@ -347,6 +355,7 @@ public class PGResult {
 	/// gets the value at the col and row as an pointer convertible to a string/data
 	/// row/col must have been validated
 	private func getRawValue(row: Int32, col: Int32) -> UnsafePointer<UInt8>? {
+		precondition(row >= 0 && col >= 0)
 		let rawPtr =  UnsafeRawPointer(PQgetvalue(result, row, col)!)
 		return rawPtr.assumingMemoryBound(to: UInt8.self)
 
