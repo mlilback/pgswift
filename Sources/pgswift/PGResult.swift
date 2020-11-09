@@ -99,6 +99,7 @@ public class PGResult {
 	/// - Throws: if any parameter is invalid, if the column's NativeType doesn't match T
 	public func getValue<T>(row: Int, column: Int) throws -> T? {
 		precondition(row >= 0 && column >= 0)
+		guard rowCount >= 0 else { throw PostgreSQLStatusErrors.noRowsReturned }
 		let isnull = PQgetisnull(result, Int32(row), Int32(column))
 		guard isnull == 0 else { return nil }
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
@@ -224,6 +225,7 @@ public class PGResult {
 	/// - Returns: the value as a Bool, or nil if NULL
 	/// - Throws: if value not a bool, or if an invalid column number
 	public func getBoolValue(row: Int, column: Int) throws -> Bool? {
+		precondition(row >= 0 && column >= 0)
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 		guard columnTypes[column].nativeType == .bool else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
 		guard let rawValue = try setupValue(row: row, column: column) else { return nil }
@@ -241,6 +243,7 @@ public class PGResult {
 	/// - Returns: the value as a date, or nil if NULL
 	/// - Throws: if native format is not a date, or if an invalid column number
 	public func getDateValue(row: Int, column: Int) throws -> Date? {
+		precondition(row >= 0 && column >= 0)
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 		guard columnTypes[column].nativeType == .date else { throw PostgreSQLStatusErrors.unsupportedDataFormat }
 		if columnFormats[column] == .string {
@@ -281,6 +284,7 @@ public class PGResult {
 	/// - Returns: the value as an integer, or nil if NULL
 	/// - Throws: if native format is not an integer, or if an invalid column number
 	public func getIntValue(row: Int, column: Int) throws -> Int? {
+		precondition(row >= 0 && column >= 0)
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 		if columnFormats[column] == .string {
 			guard let val = try? getStringValue(row: row, column: column), val.count > 0 else { return nil }
@@ -308,6 +312,7 @@ public class PGResult {
 	/// - Returns: the value as a float, or nil if NULL
 	/// - Throws: if native format is not float, or if an invalid column number
 	public func getFloatValue(row: Int, column: Int) throws -> Float? {
+		precondition(row >= 0 && column >= 0)
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 		if columnFormats[column] == .string {
 			guard let val = try? getStringValue(row: row, column: column), val.count > 0 else { return nil }
@@ -328,6 +333,7 @@ public class PGResult {
 	/// - Returns: the value as a double, or nil if NULL
 	/// - Throws: if native format is not an double or float, or if an invalid column number
 	public func getDoubleValue(row: Int, column: Int) throws -> Double? {
+		precondition(row >= 0 && column >= 0)
 		guard column < columnCount else { throw PostgreSQLStatusErrors.invalidColumnNumber }
 		if columnFormats[column] == .string {
 			guard let val = try? getStringValue(row: row, column: column), val.count > 0 else { return nil }
