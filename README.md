@@ -6,6 +6,10 @@ A PostgreSQL driver for use in swift. Requires Swift 5.0+. Builds with Swift Pac
 
 Every other driver I've seen requires as associated ORM system. I just want raw calls to postgresql.
 
+**Update**
+
+[Vapor has a new package](https://github.com/vapor/postgres-nio) using swift-nio, but I'm in no poisition to switch right now. So I'll keep working on this until I have time to experiment with the Vapor package.
+
 This is being actively developed. Not even close to a release, though it has enough basic features to use in a [Kitura](https://kitura.io/) app I'm building.
 
 The one feature that sets it apart from the other libraries (to me) is support for notifications (LISTEN/NOTIFY) using a DispatchQueue &mdash; the only other implementation I've seen uses polling!
