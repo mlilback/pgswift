@@ -16,10 +16,14 @@ public enum PostgreSQLStatusErrors: Error {
 	case alreadyOpen
 	/// the server sent back an irregular response
 	case badResponse
+	/// a message to the client failed to encode
+	case failedToEncode
 	/// thrown when getting a single value and no rows were returned
 	case emptyQuery
 	/// thrown when a requested value type does not match what is supported by the PGType
 	case unsupportedDataFormat
+	/// thrown when a query returned no rows (count of -1)
+	case noRowsReturned
 	/// thrown when PGResult is asked to get a value for invalid row number
 	case invalidRowNumber
 	/// thrown when PGResult is asked to get a value for invalid column number
