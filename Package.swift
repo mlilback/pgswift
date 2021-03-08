@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
 	name: "pgswift",
 	platforms: [
-		.macOS(.v10_13)
+		.macOS(.v11)
 	],
 	products: [
 		// Products define the executables and libraries produced by a package, and make them visible to other packages.
@@ -30,7 +30,10 @@ let package = Package(
 		),
 		.target(
 			name: "pgswift",
-			dependencies: ["CLibpq", "Logging"]),
+			dependencies: [
+			"CLibpq", 
+			.product(name: "Logging", package: "swift-log")
+			]),
 		.testTarget(
 			name: "pgswiftTests",
 			dependencies: ["pgswift"]),
